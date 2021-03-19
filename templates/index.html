@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoML website</title>
+</head>
+<body>
+    <style>
+        html, body {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+    </style>
+    <form action="/process" method="post" enctype="multipart/form-data" required>
+        <p>Select the dataset to upload</p>
+        <input type="file" name="dataset" accept=".csv" required>
+        <br>
+        <br>
+        <input type="text" name="label" placeholder="Enter label of dataset" required>
+
+        <p>Type of task</p>
+        <input type="radio" id="prediction" name="task" value="prediction" required>
+        <label for="prediction">Regression</label><br>
+        <input type="radio" id="classification" name="task" value="classification" required>
+        <label for="classification">Classification</label><br>
+        <br>
+        <button type="submit" name="submit">Submit!</button>
+    </form>
+</body>
+</html>
