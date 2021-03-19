@@ -23,17 +23,13 @@ def process():
     dataset_path = './data/{}'.format(uploaded_file.filename or 'dataset.csv')
     dataset = read_csv(dataset_path)
     pickle_path = 'model.pickle'
-    # automl_run(dataset, label, task, base_layer_models=[
-    #     'LogisticRegression',
-    #     'DecisionTreeClassifier',
-    #     'RandomForestClassifier', 
-    #     'GradientBoostingClassifier',
-    #     'ExtraTreesClassifier',
-    #     'AdaBoostClassifier'
-    #     ], 
-    #     download_model = pickle_path,
-    #     meta_layer_models = ['LogisticRegression', 'DecisionTreeClassifier', 'RandomForestClassifier', 'AdaBoostClassifier', 'BaggingClassifier', 'GradientBoostingClassifier']
-    # )
+    regression_models = ['LinearRegression', 'Ridge', 'Lasso', 'DecisionTreeRegressor', 'RandomForestRegressor', 'AdaBoostRegressor', 'ExtraTreesRegressor', 'BaggingRegressor', 'GradientBoostingRegressor']
+    classification_models = ['LogisticRegression','RandomForestClassifier', 'AdaBoostClassifier', 'BaggingClassifier', 'GradientBoostingClassifier', 'ExtraTreesClassifier', 'DecisionTreeClassifier']
+    model_list = classification_models if task == 'classification' else regression_models
+    automl_run(dataset, label, task, base_layer_models=model_list,
+        download_model = pickle_path,
+        meta_layer_models = model_list
+    )
     # return send_from_directory(filename=pickle_path+'.sav', directory='.')
     print(pickle_path+'.sav')
     return send_from_directory('.', pickle_path+'.sav', as_attachment=True)
