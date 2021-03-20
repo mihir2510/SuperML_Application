@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoML website</title>
+</head>
+<body>
+    <style>
+        html, body {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+        /* .classification {
+            display: none;
+        } */
+
+        #custom-settings {
+            display: none;
+        }
+    </style>
+    <form action="/process-result-gen" method="post" enctype="multipart/form-data" required>
+        <p>Select the dataset to upload</p>
+        <input type="file" name="dataset" accept=".csv" required>
+        <br>
+        <br>
+        <input type="text" name="label" placeholder="Enter label of dataset" required>
+
+        <p>Type of task</p>
+        <input type="radio" id="prediction" name="task" value="prediction" required checked>
+        <label for="prediction">Regression</label><br>
+        <input type="radio" id="classification" name="task" value="classification" required>
+        <label for="classification">Classification</label><br>
+        <br>
+
+        <p> Select Settings </p>
+        <input type="radio" id="default-option" name="settings" value="default" required checked>
+        <label for="default-option"> Default </label><br>
+        <input type="radio" id="custom-option" name="settings" value="custom" required>
+        <label for="custom-option "> Custom </label>
+        <br>
+
+        <div id="custom-settings">
+            <p> Feature Engineering Methods </p>
+            <input type="checkbox" id="all-features" name="fe_method" value="all_features"  checked>
+            <label for="all-features"> All Features </label><br>
+            <input type="checkbox" id="anova" name="fe_method" value="anova" checked>
+            <label for="anova "> Anova </label><br>
+            <input type="checkbox" id="correlation" name="fe_method" value="correlation" checked>
+            <label for="correlation"> Correlation </label><br>
+            <input type="checkbox" id="select_from_model" name="fe_method" value="select_from_model" checked>
+            <label for="select_from_model "> Select From Model </label><br><br>
+
+            <p> Hyper Parameter Optimization Methods </p>
+            <input type="checkbox" id="standard" name="hpo_method" value="standard"  checked>
+            <label for="standard"> No Hyper Parameter Optimization </label><br>
+            <input type="checkbox" id="grid_search" name="hpo_method" value="grid_search" >
+            <label for="grid_search "> Grid Search </label><br>
+            <input type="checkbox" id="random_search" name="hpo_method" value="random_search" >
+            <label for="random_search"> Random Search </label><br>
+            <input type="checkbox" id="bayesian_tpe" name="hpo_method" value="bayesian_tpe" >
+            <label for="bayesian_tpe "> Bayesian TPE </label><br><br>
+
+
+            <div class="prediction" id="prediction-models">
+               
+            </div>
+            <div class="classification" id="classification-models">
+                
+            </div>
+            <br><br>
+
+            <p>Enter metric to use for sorting the results</p>
+            <div class="prediction prediction-metrics">
+                
+            </div>
+            
+            <div class="classification classification-metrics">
+                
+            </div><br>
+
+            <p>Enter threshold</p>
+            <input type="text" name="threshold" placeholder="Enter threshold" value="0.9" required>
+            <br>
+
+            <p>Enter max evals</p>
+            <input type="text" name="max_evals" placeholder="Enter max evals" value="500" required>
+            <br>
+
+            <p>Test_size</p>
+            <input type="text" name="test_size" placeholder="Enter test size" value="0.3" required>
+            <br>
+
+        </div>
+
+        <button type="submit">Submit!</button>
+    </form>
+
+
+    <script>
+        let defaultSettingRadioBtn = document.getElementById('default-option')
+        let customSettingRadioBtn = document.getElementById('custom-option')
+        let predictionRadioBtn = document.getElementById('prediction')
+        let classificationRadioBtn = document.getElementById('classification')
+
+        window.addEventListener('load', (e) => {
+            document.getElementsByTagName('form')[0].reset();
+
+        })
+        
+        defaultSettingRadioBtn.addEventListener('change', (e) => {
+            let elem = document.getElementById('custom-settings')
+            elem.style.display = "none"
+        })
+
+        
+        customSettingRadioBtn.addEventListener('change', (e) => {
+            let elem = document.getElementById('custom-settings')
+            elem.style.display = "block"
+        })
+
+        let predictionFunc = (e) => {
+            // console.log('prediction clicked!');
+            // Array.from(document.getElementsByClassName('prediction')).map((elem) => {
+            //     // elem.style.display = "block"
+            // })
+            // Array.from(document.getElementsByClassName('classification')).map((elem) => {
+            //     // elem.style.display = "none"
+            // })
+            
+            Array.from(document.getElementsByClassName('classification-metrics')).map((elem, idx) => {
+                elem.innerHTML = ``
+            })
+            document.getElementById('classification-models').innerHTML = ``
+            // models change 
+            document.getElementById('prediction-models').innerHTML = `
+                <p>Model to be used for generating results</p> 
+                <input type="checkbox" id="LinearRegression" name="models" value="LinearRegression" class="" checked>
+                <label for="LinearRegression" class=""> LinearRegression </label><br>
+
+                <input type="checkbox" id="Lasso" name="models" value="Lasso" class="" checked>
+                <label for="Lasso" class="">Lasso </label><br>
+                
+                <input type="checkbox" id="Ridge" name="models" value="Ridge" class="" checked>
+                <label for="Ridge" class=""> Ridge </label><br>
+                
+                <input type="checkbox" id="DecisionTreeRegressor" name="models" value="DecisionTreeRegressor" class="" checked>
+                <label for="DecisionTreeRegressor" class=""> DecisionTreeRegressor </label><br>
+
+                <input type="checkbox" id="RandomForestRegressor" name="models" value="RandomForestRegressor" class="" checked>
+                <label for="RandomForestRegressor" class=""> RandomForestRegressor </label><br>
+
+                <input type="checkbox" id="AdaBoostRegressor" name="models" value="AdaBoostRegressor" class="" checked>
+                <label for="AdaBoostRegressor" class=""> AdaBoostRegressor </label><br>
+
+                <input type="checkbox" id="ExtraTreesRegressor" name="models" value="ExtraTreesRegressor" class="" checked>
+                <label for="ExtraTreesRegressor" class=""> ExtraTreesRegressor </label><br>
+
+                <input type="checkbox" id="ExtraTreesRegressor" name="models" value="ExtraTreesRegressor" class="" checked>
+                <label for="ExtraTreesRegressor" class=""> ExtraTreesRegressor </label><br>
+            `
+            // metrics
+            let metric = ['', '-sortby']
+            Array.from(document.getElementsByClassName('prediction-metrics')).map((elem, idx) => {
+                elem.innerHTML = `
+                <input type="radio" name="metric${metric[idx]}" id="r2-metric${metric[idx]}" class="" value="r2" required checked>
+                <label class="" for="r2-metric${metric[idx]}">R2 score</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="rmse-metric${metric[idx]}" class="" value="rmse">
+                <label class="" for="rmse-metric${metric[idx]}">RMSE</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="mae-metric${metric[idx]}" class="" value="mae">
+                <label class="" for="mae-metric${metric[idx]}">MAE</label><br>
+                `
+            })
+
+
+        }
+
+        let classificationFunc = (e) => {
+            // console.log('classification clicked!');
+            // Array.from(document.getElementsByClassName('prediction')).map((elem) => {
+            //     elem.style.display = "none"
+            // })
+            // Array.from(document.getElementsByClassName('classification')).map((elem) => {
+            //     elem.style.display = "block"
+            // })
+            document.getElementById('prediction-models').innerHTML = ``
+            Array.from(document.getElementsByClassName('prediction-metrics')).map((elem, idx) => {
+                elem.innerHTML = ``
+            })
+            document.getElementById('classification-models').innerHTML = `
+                <p>Model to be used for generating results</p> 
+                <input type="checkbox" id="LogisticRegression" name="models" value="LogisticRegression" class="" checked>
+                <label for="LogisticRegression" class=""> LogisticRegression </label><br>
+
+                <input type="checkbox" id="RandomForestClassifier" name="models" value="RandomForestClassifier" class="" checked>
+                <label for="RandomForestClassifier" class=""> RandomForestClassifier </label><br>
+                
+                <input type="checkbox" id="AdaBoostClassifier" name="models" value="AdaBoostClassifier" class="" checked>
+                <label for="AdaBoostClassifier" class=""> AdaBoostClassifier </label><br>
+                
+
+                <input type="checkbox" id="GradientBoostingClassifier" name="models" value="GradientBoostingClassifier" class="" checked>
+                <label for="GradientBoostingClassifier" class=""> GradientBoostingClassifier </label><br>
+
+                <input type="checkbox" id="DecisionTreeClassifier" name="models" value="DecisionTreeClassifier" class="" checked>
+                <label for="DecisionTreeClassifier" class=""> DecisionTreeClassifier </label><br>
+
+            `
+            let metric = ['', '-sortby']
+            Array.from(document.getElementsByClassName('classification-metrics')).map((elem, idx) => {
+                elem.innerHTML = `
+                <input type="radio" name="metric${metric[idx]}" id="accuracy-metric${metric[idx]}" class="" value="accuracy" required checked>
+                <label class="" for="accuracy-metric${metric[idx]}">Accuracy</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="f1-metric${metric[idx]}" class="" value="f1">
+                <label class="" for="f1-metric${metric[idx]}">F1 score</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="precision-metric${metric[idx]}" class="" value="precision">
+                <label class="" for="precision-metric${metric[idx]}">Precision</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="recall-metric${metric[idx]}" class="" value="recall">
+                <label class="" for="recall-metric${metric[idx]}">Recall</label><br>
+                `
+            })
+
+            
+        }
+
+
+        predictionRadioBtn.addEventListener('change', predictionFunc)
+
+        classificationRadioBtn.addEventListener('change', classificationFunc)
+               
+        predictionFunc()
+
+    </script>
