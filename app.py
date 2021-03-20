@@ -27,14 +27,14 @@ def process():
     dataset = read_csv(dataset_path)
     pickle_path = './models/model.pickle'
     excel_path = './excel_files/excel'
-    # regression_models = ['LinearRegression', 'Ridge', 'Lasso', 'DecisionTreeRegressor', 'RandomForestRegressor', 'AdaBoostRegressor', 'ExtraTreesRegressor', 'BaggingRegressor', 'GradientBoostingRegressor']
-    # classification_models = ['LogisticRegression','RandomForestClassifier', 'AdaBoostClassifier', 'BaggingClassifier', 'GradientBoostingClassifier', 'ExtraTreesClassifier', 'DecisionTreeClassifier']
-    # model_list = classification_models if task == 'classification' else regression_models
-    base_layer_models = formdata['base-layer']
-    meta_models = formdata['meta-layer']
+    regression_models = ['LinearRegression', 'Ridge', 'Lasso', 'DecisionTreeRegressor', 'RandomForestRegressor', 'AdaBoostRegressor', 'ExtraTreesRegressor', 'GradientBoostingRegressor']
+    classification_models = ['LogisticRegression','RandomForestClassifier', 'AdaBoostClassifier', 'GradientBoostingClassifier', 'ExtraTreesClassifier', 'DecisionTreeClassifier']
+    model_list = classification_models if task == 'classification' else regression_models
+    base_layer_models = formdata.get('base-layer', [])
+    meta_models = formdata.get('meta-layer', [])
     stats, _ = automl_run(dataset, label, task,
-        base_layer_models = base_layer_models,
-        meta_layer_models = meta_models,
+        base_layer_models = base_layer_models if formdata['settings'][0] == 'custom' else model_list,
+        meta_layer_models = meta_models if formdata['settings'][0] == 'custom' else model_list,
         download_model = pickle_path,
         metric=formdata['metric'][0],
         sortby=formdata['metric-sortby'][0],

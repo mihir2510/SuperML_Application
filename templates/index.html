@@ -13,9 +13,9 @@
             width: 100%;
             justify-content: center;
         }
-        .classification {
+        /* .classification {
             display: none;
-        }
+        } */
 
         #custom-settings {
             display: none;
@@ -43,188 +43,211 @@
         <br>
         
         <div id="custom-settings">
-            <div class="prediction">
-            <p>Base layer models</p> 
-            <input type="checkbox" id="LinearRegression" name="base-layer" value="LinearRegression" class="">
-            <label for="LinearRegression" class=""> LinearRegression </label><br>
-
-            <input type="checkbox" id="Lasso" name="base-layer" value="Lasso" class="">
-            <label for="Lasso" class="">Lasso </label><br>
-            
-            <input type="checkbox" id="Ridge" name="base-layer" value="Ridge" class="">
-            <label for="Ridge" class=""> Ridge </label><br>
-            
-            <input type="checkbox" id="DecisionTreeRegressor" name="base-layer" value="DecisionTreeRegressor" class="">
-            <label for="DecisionTreeRegressor" class=""> DecisionTreeRegressor </label><br>
-
-            <input type="checkbox" id="RandomForestRegressor" name="base-layer" value="RandomForestRegressor" class="">
-            <label for="RandomForestRegressor" class=""> RandomForestRegressor </label><br>
-
-            <input type="checkbox" id="AdaBoostRegressor" name="base-layer" value="AdaBoostRegressor" class="">
-            <label for="AdaBoostRegressor" class=""> AdaBoostRegressor </label><br>
-
-            <input type="checkbox" id="ExtraTreesRegressor" name="base-layer" value="ExtraTreesRegressor" class="">
-            <label for="ExtraTreesRegressor" class=""> ExtraTreesRegressor </label><br>
-
-            <input type="checkbox" id="ExtraTreesRegressor" name="base-layer" value="ExtraTreesRegressor" class="">
-            <label for="ExtraTreesRegressor" class=""> ExtraTreesRegressor </label><br>
-
-            <input type="checkbox" id="BaggingRegressor" name="base-layer" value="BaggingRegressor" class="">
-            <label for="BaggingRegressor" class=""> BaggingRegressor </label><br>
-
-
-            <p class="prediction">Meta layer models</p> 
-            <input type="checkbox" id="LinearRegression" name="meta-layer" value="LinearRegression" class="">
-            <label for="LinearRegression" class=""> LinearRegression </label><br>
-
-            <input type="checkbox" id="Lasso" name="meta-layer" value="Lasso" class="">
-            <label for="Lasso" class="">Lasso </label><br>
-            
-            <input type="checkbox" id="Ridge" name="meta-layer" value="Ridge" class="">
-            <label for="Ridge" class=""> Ridge </label><br>
-            
-            <input type="checkbox" id="DecisionTreeRegressor" name="meta-layer" value="DecisionTreeRegressor" class="">
-            <label for="DecisionTreeRegressor" class=""> DecisionTreeRegressor </label><br>
-
-            <input type="checkbox" id="RandomForestRegressor" name="meta-layer" value="RandomForestRegressor" class="">
-            <label for="RandomForestRegressor" class=""> RandomForestRegressor </label><br>
-
-            <input type="checkbox" id="AdaBoostRegressor" name="meta-layer" value="AdaBoostRegressor" class="">
-            <label for="AdaBoostRegressor" class=""> AdaBoostRegressor </label><br>
-
-            <input type="checkbox" id="ExtraTreesRegressor" name="meta-layer" value="ExtraTreesRegressor" class="">
-            <label for="ExtraTreesRegressor" class=""> ExtraTreesRegressor </label><br>
-
-            <input type="checkbox" id="ExtraTreesRegressor" name="meta-layer" value="ExtraTreesRegressor" class="">
-            <label for="ExtraTreesRegressor" class=""> ExtraTreesRegressor </label><br>
-
-            <input type="checkbox" id="BaggingRegressor" name="meta-layer" value="BaggingRegressor" class="">
-            <label for="BaggingRegressor" class=""> BaggingRegressor </label><br>
-
-            <input type="checkbox" id="GradientBoostingRegressor" name="meta-layer" value="GradientBoostingRegressor" class="">
-            <label for="GradientBoostingRegressor" class=""> GradientBoostingRegressor </label><br>
+            <div class="prediction" id="prediction-models">
+               
             </div>
-            <div class="classification">
-            <p>Base layer models</p> 
-            <input type="checkbox" id="LogisticRegression" name="base-layer" value="LogisticRegression" class="">
-            <label for="LogisticRegression" class=""> LogisticRegression </label><br>
-
-            <input type="checkbox" id="RandomForestClassifier" name="base-layer" value="RandomForestClassifier" class="">
-            <label for="RandomForestClassifier" class=""> RandomForestClassifier </label><br>
-            
-            <input type="checkbox" id="AdaBoostClassifier" name="base-layer" value="AdaBoostClassifier" class="">
-            <label for="AdaBoostClassifier" class=""> AdaBoostClassifier </label><br>
-            
-            <input type="checkbox" id="BaggingClassifier" name="base-layer" value="BaggingClassifier" class="">
-            <label for="BaggingClassifier" class=""> BaggingClassifier </label><br>
-
-            <input type="checkbox" id="GradientBoostingClassifier" name="base-layer" value="GradientBoostingClassifier" class="">
-            <label for="GradientBoostingClassifier" class=""> GradientBoostingClassifier </label><br>
-
-            <input type="checkbox" id="DecisionTreeClassifier" name="base-layer" value="DecisionTreeClassifier" class="">
-            <label for="DecisionTreeClassifier" class=""> DecisionTreeClassifier </label><br>
-
-
-            <p class="classification">Meta layer models</p> 
-            <input type="checkbox" id="LogisticRegression" name="meta-layer" value="LogisticRegression" class="">
-            <label for="LogisticRegression" class=""> LogisticRegression </label><br>
-
-            <input type="checkbox" id="RandomForestClassifier" name="meta-layer" value="RandomForestClassifier" class="">
-            <label for="RandomForestClassifier" class=""> RandomForestClassifier </label><br>
-            
-            <input type="checkbox" id="AdaBoostClassifier" name="meta-layer" value="AdaBoostClassifier" class="">
-            <label for="AdaBoostClassifier" class=""> AdaBoostClassifier </label><br>
-            
-            <input type="checkbox" id="BaggingClassifier" name="meta-layer" value="BaggingClassifier" class="">
-            <label for="BaggingClassifier" class=""> BaggingClassifier </label><br>
-
-            <input type="checkbox" id="GradientBoostingClassifier" name="meta-layer" value="GradientBoostingClassifier" class="">
-            <label for="GradientBoostingClassifier" class=""> GradientBoostingClassifier </label><br>
-
-            <input type="checkbox" id="DecisionTreeClassifier" name="meta-layer" value="DecisionTreeClassifier" class="">
-            <label for="DecisionTreeClassifier" class=""> DecisionTreeClassifier </label><br>
+            <div class="classification" id="classification-models">
+                
             </div>
 
             
 
             <br>
             <label>Value of n_splits </label><br>
-            <input type="number" value="5" name="n_splits" required>
+            <input type="number" value="5" name="n_splits">
             <br>
             
             <!-- <input type="text" name="metric" placeholder="Enter metric to use in base layer" required> -->
             <br>
-            <div class="prediction">
             <p>Enter metric to use in base layer</p>
-            <input type="radio" name="metric" id="r2-metric" class="" value="r2" required>
-            <label class="" for="r2-metric">R2 score</label><br>
-            <input type="radio" name="metric" id="rmse-metric" class="" value="rmse" required>
-            <label class="" for="rmse-metric">RMSE</label><br>
-            <input type="radio" name="metric" id="mae-metric" class="" value="mae" required>
-            <label class="" for="mae-metric">MAE</label><br>
+            <div class="prediction prediction-metrics">
+                
             </div>
             
-            <div class="classification">
-            <p>Enter metric to use in base layer</p>
-            <input type="radio" name="metric" id="accuracy-metric" class="" value="accuracy" required>
-            <label class="" for="accuracy-metric">Accuracy</label><br>
-            <input type="radio" name="metric" id="f1-metric" class="" value="f1" required>
-            <label class="" for="f1-metric">F1 score</label><br>
-            <input type="radio" name="metric" id="precision-metric" class="" value="precision" required>
-            <label class="" for="precision-metric">Precision</label><br>
-            <input type="radio" name="metric" id="recall-metric" class="" value="recall" required>
-            <label class="" for="recall-metric">Recall</label><br>
+            <div class="classification classification-metrics">
+                
             </div>
             <!-- <input type="text" name="sortby" placeholder="Enter metric to sort the ensembles" required> -->
             <br>
             <label>Enter metric to sort the ensembles</label><br>
-            <div class="prediction">
-            <input type="radio" name="metric-sortby" id="r2-metric-sortby" class="" value="r2" required>
-            <label class="" for="r2-metric-sortby">R2 score</label><br>
-            <input type="radio" name="metric-sortby" id="rmse-metric-sortby" class="" value="rmse" required>
-            <label class="" for="rmse-metric-sortby">RMSE</label><br>
-            <input type="radio" name="metric-sortby" id="mae-metric-sortby" class="" value="mae" required>
-            <label class="" for="mae-metric-sortby">MAE</label><br>
+            <div class="prediction prediction-metrics">
+                
             </div>
-            <div class="classification">
-            <input type="radio" name="metric-sortby" id="accuracy-metric-sortby" class="" value="accuracy" required>
-            <label class="" for="accuracy-metric-sortby">Accuracy</label><br>
-            <input type="radio" name="metric-sortby" id="f1-metric-sortby" class="" value="f1" required>
-            <label class="" for="f1-metric-sortby">F1 score</label><br>
-            <input type="radio" name="metric-sortby" id="precision-metric-sortby" class="" value="precision" required>
-            <label class="" for="precision-metric-sortby">Precision</label><br>
-            <input type="radio" name="metric-sortby" id="recall-metric-sortby" class="" value="recall" required>
-            <label class="" for="recall-metric-sortby">Recall</label><br>
+            <div class="classification classification-metrics">
+                
             </div>
         </div>
         <br>
-        <button type="submit" name="submit">Submit!</button>
+        <button type="submit">Submit!</button>
     </form>
     <script>
+        window.addEventListener('load', (e) => {
+            document.getElementsByTagName('form')[0].reset();
+
+        })
         let predictionRadioBtn = document.getElementById('prediction')
         let classificationRadioBtn = document.getElementById('classification')
         let defaultSettingRadioBtn = document.getElementById('default-option')
         let customSettingRadioBtn = document.getElementById('custom-option')
 
-        predictionRadioBtn.addEventListener('change', (e) => {
-            console.log('prediction clicked!');
-            Array.from(document.getElementsByClassName('prediction')).map((elem) => {
-                elem.style.display = "block"
-            })
-            Array.from(document.getElementsByClassName('classification')).map((elem) => {
-                elem.style.display = "none"
-            })
-        })
 
-        classificationRadioBtn.addEventListener('change', (e) => {
-            console.log('classification clicked!');
-            Array.from(document.getElementsByClassName('prediction')).map((elem) => {
-                elem.style.display = "none"
+        let predictionFunc = (e) => {
+            // console.log('prediction clicked!');
+            // Array.from(document.getElementsByClassName('prediction')).map((elem) => {
+            //     // elem.style.display = "block"
+            // })
+            // Array.from(document.getElementsByClassName('classification')).map((elem) => {
+            //     // elem.style.display = "none"
+            // })
+            
+            Array.from(document.getElementsByClassName('classification-metrics')).map((elem, idx) => {
+                elem.innerHTML = ``
             })
-            Array.from(document.getElementsByClassName('classification')).map((elem) => {
-                elem.style.display = "block"
+            document.getElementById('classification-models').innerHTML = ``
+            // models change 
+            document.getElementById('prediction-models').innerHTML = `
+            <p>Base layer models</p> 
+                <input type="checkbox" id="LinearRegression" name="base-layer" value="LinearRegression" class="" checked>
+                <label for="LinearRegression" class=""> LinearRegression </label><br>
+
+                <input type="checkbox" id="Lasso" name="base-layer" value="Lasso" class="" checked>
+                <label for="Lasso" class="">Lasso </label><br>
+                
+                <input type="checkbox" id="Ridge" name="base-layer" value="Ridge" class="" checked>
+                <label for="Ridge" class=""> Ridge </label><br>
+                
+                <input type="checkbox" id="DecisionTreeRegressor" name="base-layer" value="DecisionTreeRegressor" class="" checked>
+                <label for="DecisionTreeRegressor" class=""> DecisionTreeRegressor </label><br>
+
+                <input type="checkbox" id="RandomForestRegressor" name="base-layer" value="RandomForestRegressor" class="" checked>
+                <label for="RandomForestRegressor" class=""> RandomForestRegressor </label><br>
+
+                <input type="checkbox" id="AdaBoostRegressor" name="base-layer" value="AdaBoostRegressor" class="" checked>
+                <label for="AdaBoostRegressor" class=""> AdaBoostRegressor </label><br>
+
+                <input type="checkbox" id="ExtraTreesRegressor" name="base-layer" value="ExtraTreesRegressor" class="" checked>
+                <label for="ExtraTreesRegressor" class=""> ExtraTreesRegressor </label><br>
+
+                <input type="checkbox" id="ExtraTreesRegressor" name="base-layer" value="ExtraTreesRegressor" class="" checked>
+                <label for="ExtraTreesRegressor" class=""> ExtraTreesRegressor </label><br>
+
+
+
+                <p class="prediction">Meta layer models</p> 
+                <input type="checkbox" id="LinearRegression" name="meta-layer" value="LinearRegression" class="" checked>
+                <label for="LinearRegression" class=""> LinearRegression </label><br>
+
+                <input type="checkbox" id="Lasso" name="meta-layer" value="Lasso" class="" checked>
+                <label for="Lasso" class="">Lasso </label><br>
+                
+                <input type="checkbox" id="Ridge" name="meta-layer" value="Ridge" class="" checked>
+                <label for="Ridge" class=""> Ridge </label><br>
+                
+                <input type="checkbox" id="DecisionTreeRegressor" name="meta-layer" value="DecisionTreeRegressor" class="" checked>
+                <label for="DecisionTreeRegressor" class=""> DecisionTreeRegressor </label><br>
+
+                <input type="checkbox" id="RandomForestRegressor" name="meta-layer" value="RandomForestRegressor" class="" checked>
+                <label for="RandomForestRegressor" class=""> RandomForestRegressor </label><br>
+
+                <input type="checkbox" id="AdaBoostRegressor" name="meta-layer" value="AdaBoostRegressor" class="" checked>
+                <label for="AdaBoostRegressor" class=""> AdaBoostRegressor </label><br>
+
+                <input type="checkbox" id="ExtraTreesRegressor" name="meta-layer" value="ExtraTreesRegressor" class="" checked>
+                <label for="ExtraTreesRegressor" class=""> ExtraTreesRegressor </label><br>
+
+                <input type="checkbox" id="ExtraTreesRegressor" name="meta-layer" value="ExtraTreesRegressor" class="" checked>
+                <label for="ExtraTreesRegressor" class=""> ExtraTreesRegressor </label><br>
+
+
+                <input type="checkbox" id="GradientBoostingRegressor" name="meta-layer" value="GradientBoostingRegressor" class="" checked>
+                <label for="GradientBoostingRegressor" class=""> GradientBoostingRegressor </label><br>
+            `
+            // metrics
+            let metric = ['', '-sortby']
+            Array.from(document.getElementsByClassName('prediction-metrics')).map((elem, idx) => {
+                elem.innerHTML = `
+                <input type="radio" name="metric${metric[idx]}" id="r2-metric${metric[idx]}" class="" value="r2" required checked>
+                <label class="" for="r2-metric${metric[idx]}">R2 score</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="rmse-metric${metric[idx]}" class="" value="rmse">
+                <label class="" for="rmse-metric${metric[idx]}">RMSE</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="mae-metric${metric[idx]}" class="" value="mae">
+                <label class="" for="mae-metric${metric[idx]}">MAE</label><br>
+                `
             })
-        })
+
+
+        }
+
+        let classificationFunc = (e) => {
+            // console.log('classification clicked!');
+            // Array.from(document.getElementsByClassName('prediction')).map((elem) => {
+            //     elem.style.display = "none"
+            // })
+            // Array.from(document.getElementsByClassName('classification')).map((elem) => {
+            //     elem.style.display = "block"
+            // })
+            document.getElementById('prediction-models').innerHTML = ``
+            Array.from(document.getElementsByClassName('prediction-metrics')).map((elem, idx) => {
+                elem.innerHTML = ``
+            })
+            document.getElementById('classification-models').innerHTML = `
+            <p>Base layer models</p> 
+                <input type="checkbox" id="LogisticRegression" name="base-layer" value="LogisticRegression" class="" checked>
+                <label for="LogisticRegression" class=""> LogisticRegression </label><br>
+
+                <input type="checkbox" id="RandomForestClassifier" name="base-layer" value="RandomForestClassifier" class="" checked>
+                <label for="RandomForestClassifier" class=""> RandomForestClassifier </label><br>
+                
+                <input type="checkbox" id="AdaBoostClassifier" name="base-layer" value="AdaBoostClassifier" class="" checked>
+                <label for="AdaBoostClassifier" class=""> AdaBoostClassifier </label><br>
+                
+
+                <input type="checkbox" id="GradientBoostingClassifier" name="base-layer" value="GradientBoostingClassifier" class="" checked>
+                <label for="GradientBoostingClassifier" class=""> GradientBoostingClassifier </label><br>
+
+                <input type="checkbox" id="DecisionTreeClassifier" name="base-layer" value="DecisionTreeClassifier" class="" checked>
+                <label for="DecisionTreeClassifier" class=""> DecisionTreeClassifier </label><br>
+
+
+                <p class="classification">Meta layer models</p> 
+                <input type="checkbox" id="LogisticRegression" name="meta-layer" value="LogisticRegression" class="" checked>
+                <label for="LogisticRegression" class=""> LogisticRegression </label><br>
+
+                <input type="checkbox" id="RandomForestClassifier" name="meta-layer" value="RandomForestClassifier" class="" checked>
+                <label for="RandomForestClassifier" class=""> RandomForestClassifier </label><br>
+                
+                <input type="checkbox" id="AdaBoostClassifier" name="meta-layer" value="AdaBoostClassifier" class="" checked>
+                <label for="AdaBoostClassifier" class=""> AdaBoostClassifier </label><br>
+                
+
+                <input type="checkbox" id="GradientBoostingClassifier" name="meta-layer" value="GradientBoostingClassifier" class="" checked>
+                <label for="GradientBoostingClassifier" class=""> GradientBoostingClassifier </label><br>
+
+                <input type="checkbox" id="DecisionTreeClassifier" name="meta-layer" value="DecisionTreeClassifier" class="" checked>
+                <label for="DecisionTreeClassifier" class=""> DecisionTreeClassifier </label><br>
+            `
+            let metric = ['', '-sortby']
+            Array.from(document.getElementsByClassName('classification-metrics')).map((elem, idx) => {
+                elem.innerHTML = `
+                <input type="radio" name="metric${metric[idx]}" id="accuracy-metric${metric[idx]}" class="" value="accuracy" required checked>
+                <label class="" for="accuracy-metric${metric[idx]}">Accuracy</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="f1-metric${metric[idx]}" class="" value="f1">
+                <label class="" for="f1-metric${metric[idx]}">F1 score</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="precision-metric${metric[idx]}" class="" value="precision">
+                <label class="" for="precision-metric${metric[idx]}">Precision</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="recall-metric${metric[idx]}" class="" value="recall">
+                <label class="" for="recall-metric${metric[idx]}">Recall</label><br>
+                `
+            })
+
+            
+        }
+
+        predictionRadioBtn.addEventListener('change', predictionFunc)
+
+        classificationRadioBtn.addEventListener('change', classificationFunc)
+               
+        predictionFunc()
 
         defaultSettingRadioBtn.addEventListener('change', (e) => {
             let elem = document.getElementById('custom-settings')
