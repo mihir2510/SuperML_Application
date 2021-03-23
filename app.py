@@ -59,6 +59,7 @@ def result_gen():
 
 @app.route('/process-result-gen', methods=['POST'])
 def process_result_gen():
+    print(request.form)
     label = request.form['label']
     task = request.form['task']
     formdata = dict(list(request.form.lists()))
@@ -75,15 +76,31 @@ def process_result_gen():
     hpo_methods = formdata.get('hpo_method')
     models = formdata.get('models')
     sortby = formdata.get('metric')
+    threshold = float(request.form['threshold'])
+    max_evals = int(request.form['max_evals'])
+    test_size = float(request.form['test_size'])
     print(sortby)
-    stats, model = auto_trainer(dataset,label,task, feature_engineering_methods=feature_engineering_methods, hpo_methods=hpo_methods, models=models, sortby = sortby[0])
+    stats, model = auto_trainer(dataset,label,task, feature_engineering_methods=feature_engineering_methods, 
+                                    hpo_methods=hpo_methods, 
+                                    models=models, 
+                                    sortby = sortby[0], 
+                                    download_model = pickle_path, 
+                                    excel_file=excel_path,
+                                    threshold=threshold,
+                                    max_evals=max_evals,
+                                    test_size=test_size)
     print(stats.head())
-
-    return 'data-submitted'
+    metric_to_show = stats.iloc[0][sortby[0]]
+    return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = sortby)
 
 @app.route('/<path:path>')
 def send_js(path):
     return send_from_directory('.', path)
+
+
+@app.route('/trial')
+def trial():
+    return render_template('trial.html')
 
 if __name__ == '__main__':
     app.run(port=port, debug=True)
