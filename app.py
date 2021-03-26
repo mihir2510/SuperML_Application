@@ -9,6 +9,10 @@ app.config.from_object(settings)
 
 
 
+@app.route('/')
+def home():
+    return render_template('home.html')
+
 @app.route('/ensemble')
 def ensemble():
     # return {
