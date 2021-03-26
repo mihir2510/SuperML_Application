@@ -1,135 +1,554 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+<style>
+* {
+  box-sizing: border-box;
+}
 
-<head>
-    <title>Contact V3</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="./static/images/icons/favicon.ico" />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="./static/vendor/bootstrap/css/bootstrap.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="./static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="./static/vendor/animate/animate.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="./static/vendor/css-hamburgers/hamburgers.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="./static/vendor/select2/select2.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="./static/css/util.css">
-    <link rel="stylesheet" type="text/css" href="./static/css/main.css">
-    <!--===============================================================================================-->
-</head>
+body {
+  background-color: black;
+}
 
+#regForm {
+  background-color: #ffffff;
+  margin: 5% auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 80%;
+  height: 600px;
+  min-width: 300px;
+}
+
+h1 {
+  text-align: center;  
+}
+
+input {  
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  
+  margin: 0 2px;
+  border: none;
+  opacity: 0.5;
+}
+
+.col {
+  background-color: #bbbbbb;
+  border: solid black 2px;
+  padding: 10px;
+  text-align: center;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.tab {
+  margin-top: 30px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.labeller {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid #d2d2dc;
+            border-radius: 0
+        }
+        
+        .card .card-body {
+            padding: 1.25rem 1.75rem
+        }
+        
+        .card-body {
+            flex: 1 1 auto;
+            padding: 1.25rem
+        }
+        
+        .card .card-title {
+            color: #000000;
+            margin-bottom: 0.625rem;
+            text-transform: capitalize;
+            font-size: 0.875rem;
+            font-weight: 500
+        }
+        
+        .card .card-description {
+            margin-bottom: .875rem;
+            font-weight: 400;
+            color: #76838f
+        }
+        
+        p {
+            font-size: 0.875rem;
+            margin-bottom: .5rem;
+            line-height: 1.5rem
+        }
+        
+        label.check {
+            cursor: pointer
+        }
+        
+        label.check input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            visibility: hidden;
+            pointer-events: none
+        }
+        
+        label.check span {
+            padding: 7px 14px;
+            border: 2px solid #8f37aa;
+            display: inline-block;
+            color: #8f37aa;
+            border-radius: 3px;
+            text-transform: uppercase
+        }
+        
+        label.check input:checked+span {
+            border-color: #8f37aa;
+            background-color: #8f37aa;
+            color: #fff
+        }
+
+        
+</style>
 <body>
 
-    <div class="bg-contact3" style="background-image: url('./static/images/bg-01.jpg');">
-        <div class="container-contact3">
-            <div class="wrap-contact3">
-                <form class="contact3-form validate-form">
-                    <span class="contact3-form-title">
-						Contact Us
-					</span>
-
-                    <div class="wrap-contact3-form-radio">
-                        <div class="contact3-form-radio m-r-42">
-                            <input class="input-radio3" id="radio1" type="radio" name="choice" value="say-hi" checked="checked">
-                            <label class="label-radio3" for="radio1">
-								Say Hi
-							</label>
-                        </div>
-
-                        <div class="contact3-form-radio">
-                            <input class="input-radio3" id="radio2" type="radio" name="choice" value="get-quote">
-                            <label class="label-radio3" for="radio2">
-								Get a Quote
-							</label>
-                        </div>
-                    </div>
-
-                    <div class="wrap-input3 validate-input" data-validate="Name is required">
-                        <input class="input3" type="text" name="name" placeholder="Your Name">
-                        <span class="focus-input3"></span>
-                    </div>
-
-                    <div class="wrap-input3 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <input class="input3" type="text" name="email" placeholder="Your Email">
-                        <span class="focus-input3"></span>
-                    </div>
-
-                    <div class="wrap-input3 input3-select">
-                        <div>
-                            <select class="selection-2" name="service">
-								<option>Needed Services</option>
-								<option>eCommerce Bussiness</option>
-								<option>UI/UX Design</option>
-								<option>Online Services</option>
-							</select>
-                        </div>
-                        <span class="focus-input3"></span>
-                    </div>
-
-                    <div class="wrap-input3 input3-select">
-                        <div>
-                            <select class="selection-2" name="budget">
-								<option>Budget</option>
-								<option>1500 $</option>
-								<option>2000 $</option>
-								<option>3000 $</option>
-							</select>
-                        </div>
-                        <span class="focus-input3"></span>
-                    </div>
-
-                    <div class="wrap-input3 validate-input" data-validate="Message is required">
-                        <textarea class="input3" name="message" placeholder="Your Message"></textarea>
-                        <span class="focus-input3"></span>
-                    </div>
-
-                    <div class="container-contact3-form-btn">
-                        <button class="contact3-form-btn">
-							Submit
-						</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+<form id="regForm" action="/action_page.php" method="post" enctype="multipart/form-data" required>
+  <div class="row">
+    <div class="col step">
+      <span class="">Upload Data</span>
+    </div>
+    <div class="col step">
+      <span class="">Select task</span>
+    </div>
+    <div class="col step">
+      <span class="">Select Methods</span>
+    </div>
+    <div class="col step">
+      <span class="">Select Models </span>
+    </div>
+    <div class="col step">
+      <span class="">Set Variables</span>
+    </div>
+  </div>
+  <!-- One "tab" for each step in the form: -->
+  <div class="tab">
+    <div class="">
+      <div class="text-center">
+        <span> Instructions </span><br>
+        <span>Someting</span><br>
+        <span>Someting</span><br>
+      </div>
     </div>
 
+    <div class="row">
+      <div class="form-group col-lg-6">
+          <p class="labeller">Select the dataset to upload</p>
+          <input type="file" name="dataset" accept=".csv" class="form-control" required>
+      </div>
 
-    <div id="dropDownSelect1"></div>
+      <div class="form-group col-lg-6">
+          <label for="label" class="labeller"> Enter the target variable for the dataset</label>
+          <input type="text" class="form-control" name="label" placeholder="" class="form-control" required>
+      </div>
+    </div>
+    
+  </div>
+  <div class="tab">
+    <div class="form-group">
+        <p class="labeller">Type of task</p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="prediction" name="task" value="prediction" required checked>
+            <label class="form-check-label" for="prediction">Regression</label><br>
+        </div>
 
-    <!--===============================================================================================-->
-    <script src="./static/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="./static/vendor/bootstrap/js/popper.js"></script>
-    <script src="./static/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="./static/vendor/select2/select2.min.js"></script>
-    <script>
-        $(".selection-2").select2({
-            minimumResultsForSearch: 20,
-            dropdownParent: $('#dropDownSelect1')
-        });
-    </script>
-    <!--===============================================================================================-->
-    <script src="./static/js/main.js"></script>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="classification" name="task" value="classification" required>
+            <label class="form-check-label" for="classification">Classification</label><br>
+        </div>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+    </div>
 
-        function gtag() {
-            dataLayer.push(arguments);
+    <div class="form-group">
+        <p class="labeller"> Select Settings </p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="default-option" name="settings" value="default" required checked>
+            <label class="form-check-label" for="default-option"> Default </label><br>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="custom-option" name="settings" value="custom" required>
+            <label class="form-check-label" for="custom-option "> Custom </label>
+        </div>
+    </div>
+  </div>
+
+
+  <div class="tab">
+    <div class="form-group">
+        <p class="labeller"> Feature Engineering Methods </p>
+
+        <div>
+            <label class="check"> <input type="checkbox" name="fe_method" value="all_features" checked> <span>All Features</span> </label>
+            <label class="check"> <input type="checkbox" name="fe_method" value="anova"> <span>Anova</span> </label>
+            <label class="check"> <input type="checkbox" name="fe_method" value="pca"> <span>PCA</span> </label>
+            <label class="check"> <input type="checkbox" name="fe_method" value="correlation"> <span>Correlation</span> </label>
+            <label class="check"> <input type="checkbox" name="fe_method" value="select_from_model"> <span>Select From Model</span> </label>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <p class="labeller"> Hyper Parameter Optimization Methods </p>
+
+        <div>
+            <label class="check"> <input type="checkbox" name="hpo_method" value="standard" checked> <span> No HPO </span> </label>
+            <label class="check"> <input type="checkbox" name="hpo_method" value="grid_search"> <span>Grid Search</span> </label>
+            <label class="check"> <input type="checkbox" name="hpo_method" value="random_search"> <span>Random Search</span> </label>
+            <label class="check"> <input type="checkbox" name="hpo_method" value="bayesian_tpe"> <span>Bayesian TPE</span> </label>
+        </div>
+    </div>
+  </div>
+
+
+  <div class="tab">
+    <div class="prediction" id="prediction-models">
+
+    </div>
+    <div class="classification" id="classification-models">
+
+    </div>
+    <br>
+
+    
+
+    <div class="form-group">
+        <p class="labeller">Value of n_splits</p>
+        <input type="number" value="5" name="n_splits" class="form-control" required>
+    </div>
+
+    
+
+    
+  </div>
+
+
+  <div class="tab">
+    <div class="row">
+      <div class="form-group col-lg-6">
+          <p class="labeller">Select metric to use in base layer</p>
+          <div class="prediction prediction-metrics">
+
+          </div>
+          <div class="classification classification-metrics">
+
+          </div>
+      </div>
+
+      <div class="form-group col-lg-6">
+          <p class="labeller">Select metric to sort the ensembles</p>
+          <div class="prediction prediction-metrics">
+
+          </div>
+          <div class="classification classification-metrics">
+
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-end" >
+      <div style="margin-right: 5px;">
+        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+      </div>
+      <div class="change-button">
+        <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+      </div>
+  </div>
+  <!-- Circles which indicates the steps of the form: -->
+  
+</form>
+
+<script>
+var currentTab = 0; // Current tab is set to be the first tab (0)
+var visited = 0;
+showTab(currentTab); // Display the current tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  let defaultSettingRadioBtn = document.getElementById('default-option')
+  //... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  
+
+  if (n == (x.length - 1)) {
+    var groups = document.getElementsByClassName("change-button");
+    console.log(groups);
+    groups[0].innerHTML = '<button type="submit" id="nextBtn" >Submit</button>';
+  } 
+
+  else if (n == 1 && defaultSettingRadioBtn.checked) {
+    var groups = document.getElementsByClassName("change-button");
+    console.log(groups);
+    groups[0].innerHTML = '<button type="submit" id="nextBtn" >Submit</button>';
+    visited=1;
+  } 
+
+  else {
+    var groups = document.getElementsByClassName("change-button");
+    groups[0].innerHTML = '<button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>';
+  }
+  //... and run a function that will display the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form...
+  if (currentTab >= x.length) {
+    // ... the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+
+let predictionRadioBtn = document.getElementById('prediction')
+        let classificationRadioBtn = document.getElementById('classification')
+        let defaultSettingRadioBtn = document.getElementById('default-option')
+        let customSettingRadioBtn = document.getElementById('custom-option')
+        let predictionModels = ['LinearRegression', 'Lasso', 'Ridge', 'DecisionTreeRegressor',
+            'RandomForestRegressor', 'AdaBoostRegressor', 'ExtraTreesRegressor'
+        ]
+        let classificationModels = ['LogisticRegression', 'RandomForestClassifier', 'AdaBoostClassifier',
+            'GradientBoostingClassifier', 'DecisionTreeClassifier'
+        ]
+
+        window.addEventListener('load', (e) => {
+            document.getElementsByTagName('form')[0].reset();
+
+        })
+
+
+        defaultSettingRadioBtn.addEventListener('change', (e) => {
+            var groups = document.getElementsByClassName("change-button");
+            groups[0].innerHTML = '<button type="submit" id="nextBtn" >Submit</button>';
+            console.log(groups);
+        })
+
+        customSettingRadioBtn.addEventListener('change', (e) => {
+            var groups = document.getElementsByClassName("change-button");
+            groups[0].innerHTML = '<button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>';
+            console.log(groups);
+        })
+
+
+        let predictionFunc = (e) => {
+                // console.log('prediction clicked!');
+                // Array.from(document.getElementsByClassName('prediction')).map((elem) => {
+                //     // elem.style.display = "block"
+                // })
+                // Array.from(document.getElementsByClassName('classification')).map((elem) => {
+                //     // elem.style.display = "none"
+                // })
+
+                Array.from(document.getElementsByClassName('classification-metrics')).map((elem, idx) => {
+                    elem.innerHTML = ``
+                })
+                document.getElementById('classification-models').innerHTML = ``
+                    // models change 
+                document.getElementById('prediction-models').innerHTML = `
+                <div class="form-group" >
+                <p class="labeller">Base layer models</p> 
+                ${predictionModels.map((model) => {
+                    return `<label class="check"> <input type="checkbox" name="meta-layer" value="${model}" checked> <span> ${model} </span> </label>`
+                }).join('\n')}
+                </div>
+                <div class="form-group" >
+                <p class="labeller">Meta layer models</p>
+                ${predictionModels.map((model) => {
+                    return `<label class="check"> <input type="checkbox" name="meta-layer" value="${model}" checked> <span> ${model} </span> </label>`
+                }).join('\n')}
+                </div>
+   
+            `
+            
+            // metrics
+            let metric = ['', '-sortby']
+            Array.from(document.getElementsByClassName('prediction-metrics')).map((elem, idx) => {
+                elem.innerHTML = `
+                <input type="radio" name="metric${metric[idx]}" id="r2-metric${metric[idx]}" class="" value="r2" required checked>
+                <label class="" for="r2-metric${metric[idx]}">R2 score</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="rmse-metric${metric[idx]}" class="" value="rmse">
+                <label class="" for="rmse-metric${metric[idx]}">RMSE</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="mae-metric${metric[idx]}" class="" value="mae">
+                <label class="" for="mae-metric${metric[idx]}">MAE</label><br>
+                `
+            })
+
+
         }
-        gtag('js', new Date());
 
-        gtag('config', 'UA-23581568-13');
-    </script>
+        let classificationFunc = (e) => {
+            // console.log('classification clicked!');
+            // Array.from(document.getElementsByClassName('prediction')).map((elem) => {
+            //     elem.style.display = "none"
+            // })
+            // Array.from(document.getElementsByClassName('classification')).map((elem) => {
+            //     elem.style.display = "block"
+            // })
+            document.getElementById('prediction-models').innerHTML = ``
+            Array.from(document.getElementsByClassName('prediction-metrics')).map((elem, idx) => {
+                elem.innerHTML = ``
+            })
+            document.getElementById('classification-models').innerHTML = `
+                <div class="form-group">
+                <p class="labeller">Base layer models</p>
+                ${classificationModels.map((model) => {
+                    return `<label class="check"> <input type="checkbox" name="base-layer" value="${model}" checked> <span> ${model} </span> </label>`
+                }).join('\n')}
+                </div>
+                <div class="form-group">
+                <p class="labeller">Meta layer models</p> 
+                ${classificationModels.map((model) => {
+                    return `<label class="check"> <input type="checkbox" name="base-layer" value="${model}" checked> <span> ${model} </span> </label>`
+                }).join('\n')}
+                </div>
+            `
+            
+            let metric = ['', '-sortby']
+            Array.from(document.getElementsByClassName('classification-metrics')).map((elem, idx) => {
+                elem.innerHTML = `
+                <input type="radio" name="metric${metric[idx]}" id="accuracy-metric${metric[idx]}" class="" value="accuracy" required checked>
+                <label class="" for="accuracy-metric${metric[idx]}">Accuracy</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="f1-metric${metric[idx]}" class="" value="f1">
+                <label class="" for="f1-metric${metric[idx]}">F1 score</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="precision-metric${metric[idx]}" class="" value="precision">
+                <label class="" for="precision-metric${metric[idx]}">Precision</label><br>
+                <input type="radio" name="metric${metric[idx]}" id="recall-metric${metric[idx]}" class="" value="recall">
+                <label class="" for="recall-metric${metric[idx]}">Recall</label><br>
+                `
+            })
+
+            
+        }
+
+        predictionRadioBtn.addEventListener('change', predictionFunc)
+
+        classificationRadioBtn.addEventListener('change', classificationFunc)
+               
+        predictionFunc()
+
+
+</script>
 
 </body>
-
 </html>

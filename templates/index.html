@@ -1,46 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+<style>
+* {
+  box-sizing: border-box;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoML website</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+body {
+  background-color: black;
+}
 
-    <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
-</head>
+#regForm {
+  background-color: #ffffff;
+  margin: 5% auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 80%;
+  height: 600px;
+  min-width: 300px;
+}
 
-<body>
-    <style>
-        /* .classification {
-            display: none;
-        } */
-        
-        body {
-            background: #121212;
-        }
-        
-        form {
-            background: white;
-        }
-        
-        #custom-settings {
-            display: none;
-        }
-        
-        .mt-100 {
-            margin-top: 100px
-        }
-        
-        .mb-30 {
-            margin-bottom: 30px
-        }
-        
-        .card {
+h1 {
+  text-align: center;  
+}
+
+input {  
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  
+  margin: 0 2px;
+  border: none;
+  opacity: 0.5;
+}
+
+.col {
+  background-color: #bbbbbb;
+  border: solid black 2px;
+  padding: 10px;
+  text-align: center;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.tab {
+  margin-top: 30px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.labeller {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card {
             position: relative;
             display: flex;
             flex-direction: column;
@@ -107,156 +169,259 @@
             background-color: #8f37aa;
             color: #fff
         }
+
         
-        .button {
-            /* Green */
-            border: none;
-            color: white;
-            padding: 8px 24px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-        }
-        
-        .button1 {
-            background-color: white;
-            color: black;
-            border: 2px solid #8f37aa;
-        }
-        
-        .button1:hover {
-            background-color: #8f37aa;
-            color: white;
-        }
-        
-        .labeller {
-            font-size: 20px;
-            font-weight: bold;
-        }
-        
-        form {
-            border: solid 3px #8f37aa;
-            border-radius: 10px;
-        }
-        
-        .form-group {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            padding: 10px;
-        }
-        
-        .box-container {
-            margin-top: 30px;
-            margin-bottom: 30px;
-        }
-    </style>
+</style>
+<body>
 
-    <div class="d-flex justify-content-center box-container">
-        <div class="col-sm-6">
-            <form class="" action="/process" method="post" enctype="multipart/form-data" required>
+<form id="regForm" action="/process" method="post" enctype="multipart/form-data" required>
+  <div class="row">
+    <div class="col step">
+      <span class="">Upload Data</span>
+    </div>
+    <div class="col step">
+      <span class="">Select task</span>
+    </div>
+    <div class="col step">
+      <span class="">Select Methods</span>
+    </div>
+    <div class="col step">
+      <span class="">Select Models </span>
+    </div>
+    <div class="col step">
+      <span class="">Set Variables</span>
+    </div>
+  </div>
+  <!-- One "tab" for each step in the form: -->
+  <div class="tab">
+    <div class="">
+      <div class="text-center">
+        <span> Instructions </span><br>
+        <span>Someting</span><br>
+        <span>Someting</span><br>
+      </div>
+    </div>
 
-                <div class="form-group">
-                    <p class="labeller">Select the dataset to upload</p>
-                    <input type="file" name="dataset" accept=".csv" class="form-control" required>
-                </div>
+    <div class="row">
+      <div class="form-group col-lg-6">
+          <p class="labeller">Select the dataset to upload</p>
+          <input type="file" name="dataset" accept=".csv" class="form-control" required>
+      </div>
 
-                <div class="form-group">
-                    <label for="label" class="labeller"> Enter the target variable for the dataset</label>
-                    <input type="text" class="form-control" name="label" placeholder="" class="form-control" required>
-                </div>
+      <div class="form-group col-lg-6">
+          <label for="label" class="labeller"> Enter the target variable for the dataset</label>
+          <input type="text" class="form-control" name="label" placeholder="" class="form-control" required>
+      </div>
+    </div>
+    
+  </div>
+  <div class="tab">
+    <div class="form-group">
+        <p class="labeller">Type of task</p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="prediction" name="task" value="prediction" required checked>
+            <label class="form-check-label" for="prediction">Regression</label><br>
+        </div>
 
-                <div class="form-group">
-                    <p class="labeller">Type of task</p>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input " type="radio" id="prediction" name="task" value="prediction" required checked>
-                        <label class="form-check-label" for="prediction">Regression</label><br>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="classification" name="task" value="classification" required>
-                        <label class="form-check-label" for="classification">Classification</label><br>
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-                    <p class="labeller"> Select Settings </p>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="default-option" name="settings" value="default" required checked>
-                        <label class="form-check-label" for="default-option"> Default </label><br>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="custom-option" name="settings" value="custom" required>
-                        <label class="form-check-label" for="custom-option "> Custom </label>
-                    </div>
-                </div>
-
-                <div id="custom-settings">
-                    <div class="prediction" id="prediction-models">
-
-                    </div>
-                    <div class="classification" id="classification-models">
-
-                    </div>
-
-                    <div class="form-group">
-                        <p class="labeller">Value of n_splits</p>
-                        <input type="number" value="5" name="n_splits" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <p class="labeller">Select metric to use in base layer</p>
-                        <div class="prediction prediction-metrics">
-
-                        </div>
-                    </div>
-
-
-
-                    <!-- <input type="text" name="metric" placeholder="Enter metric to use in base layer" required> -->
-
-                    <div class="form-group">
-                        <div class="classification classification-metrics">
-
-                        </div>
-                    </div>
-
-                    <!-- <input type="text" name="sortby" placeholder="Enter metric to sort the ensembles" required> -->
-                    <div class="form-group">
-                        <p class="labeller">Select metric to sort the ensembles</p>
-                        <div class="prediction prediction-metrics">
-
-                        </div>
-                    </div>
-
-                    <div class=form-group>
-                        <div class="classification classification-metrics">
-
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="d-flex justify-content-center" style="margin-bottom: 20px;">
-                    <button type="submit" class="button button1">Submit</button>
-                </div>
-            </form>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="classification" name="task" value="classification" required>
+            <label class="form-check-label" for="classification">Classification</label><br>
         </div>
 
     </div>
 
-    <script>
-        window.addEventListener('load', (e) => {
-            document.getElementsByTagName('form')[0].reset();
+    <div class="form-group">
+        <p class="labeller"> Select Settings </p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="default-option" name="settings" value="default" required checked>
+            <label class="form-check-label" for="default-option"> Default </label><br>
+        </div>
 
-        })
-        let predictionRadioBtn = document.getElementById('prediction')
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="custom-option" name="settings" value="custom" required>
+            <label class="form-check-label" for="custom-option "> Custom </label>
+        </div>
+    </div>
+  </div>
+
+
+  <div class="tab">
+    <div class="form-group">
+        <p class="labeller"> Feature Engineering Methods </p>
+
+        <div>
+            <label class="check"> <input type="checkbox" name="fe_method" value="all_features" checked> <span>All Features</span> </label>
+            <label class="check"> <input type="checkbox" name="fe_method" value="anova"> <span>Anova</span> </label>
+            <label class="check"> <input type="checkbox" name="fe_method" value="pca"> <span>PCA</span> </label>
+            <label class="check"> <input type="checkbox" name="fe_method" value="correlation"> <span>Correlation</span> </label>
+            <label class="check"> <input type="checkbox" name="fe_method" value="select_from_model"> <span>Select From Model</span> </label>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <p class="labeller"> Hyper Parameter Optimization Methods </p>
+
+        <div>
+            <label class="check"> <input type="checkbox" name="hpo_method" value="standard" checked> <span> No HPO </span> </label>
+            <label class="check"> <input type="checkbox" name="hpo_method" value="grid_search"> <span>Grid Search</span> </label>
+            <label class="check"> <input type="checkbox" name="hpo_method" value="random_search"> <span>Random Search</span> </label>
+            <label class="check"> <input type="checkbox" name="hpo_method" value="bayesian_tpe"> <span>Bayesian TPE</span> </label>
+        </div>
+    </div>
+  </div>
+
+
+  <div class="tab">
+    <div class="prediction" id="prediction-models">
+
+    </div>
+    <div class="classification" id="classification-models">
+
+    </div>
+    <br>
+
+    
+
+    <div class="form-group">
+        <p class="labeller">Value of n_splits</p>
+        <input type="number" value="5" name="n_splits" class="form-control" required>
+    </div>
+
+    
+
+    
+  </div>
+
+
+  <div class="tab">
+    <div class="row">
+      <div class="form-group col-lg-6">
+          <p class="labeller">Select metric to use in base layer</p>
+          <div class="prediction prediction-metrics">
+
+          </div>
+          <div class="classification classification-metrics">
+
+          </div>
+      </div>
+
+      <div class="form-group col-lg-6">
+          <p class="labeller">Select metric to sort the ensembles</p>
+          <div class="prediction prediction-metrics">
+
+          </div>
+          <div class="classification classification-metrics">
+
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-end" >
+      <div style="margin-right: 5px;">
+        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+      </div>
+      <div class="change-button">
+        <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+      </div>
+  </div>
+  <!-- Circles which indicates the steps of the form: -->
+  
+</form>
+
+<script>
+var currentTab = 0; // Current tab is set to be the first tab (0)
+var visited = 0;
+showTab(currentTab); // Display the current tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  let defaultSettingRadioBtn = document.getElementById('default-option')
+  //... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  
+
+  if (n == (x.length - 1)) {
+    var groups = document.getElementsByClassName("change-button");
+    console.log(groups);
+    groups[0].innerHTML = '<button type="submit" id="nextBtn" >Submit</button>';
+  } 
+
+  else if (n == 1 && defaultSettingRadioBtn.checked) {
+    var groups = document.getElementsByClassName("change-button");
+    console.log(groups);
+    groups[0].innerHTML = '<button type="submit" id="nextBtn" >Submit</button>';
+    visited=1;
+  } 
+
+  else {
+    var groups = document.getElementsByClassName("change-button");
+    groups[0].innerHTML = '<button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>';
+  }
+  //... and run a function that will display the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form...
+  if (currentTab >= x.length) {
+    // ... the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+
+let predictionRadioBtn = document.getElementById('prediction')
         let classificationRadioBtn = document.getElementById('classification')
         let defaultSettingRadioBtn = document.getElementById('default-option')
         let customSettingRadioBtn = document.getElementById('custom-option')
@@ -266,6 +431,25 @@
         let classificationModels = ['LogisticRegression', 'RandomForestClassifier', 'AdaBoostClassifier',
             'GradientBoostingClassifier', 'DecisionTreeClassifier'
         ]
+
+        window.addEventListener('load', (e) => {
+            document.getElementsByTagName('form')[0].reset();
+
+        })
+
+
+        defaultSettingRadioBtn.addEventListener('change', (e) => {
+            var groups = document.getElementsByClassName("change-button");
+            groups[0].innerHTML = '<button type="submit" id="nextBtn" >Submit</button>';
+            console.log(groups);
+        })
+
+        customSettingRadioBtn.addEventListener('change', (e) => {
+            var groups = document.getElementsByClassName("change-button");
+            groups[0].innerHTML = '<button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>';
+            console.log(groups);
+        })
+
 
         let predictionFunc = (e) => {
                 // console.log('prediction clicked!');
@@ -282,13 +466,13 @@
                 document.getElementById('classification-models').innerHTML = ``
                     // models change 
                 document.getElementById('prediction-models').innerHTML = `
-                <div class="form-group" style="text-align: center">
+                <div class="form-group" >
                 <p class="labeller">Base layer models</p> 
                 ${predictionModels.map((model) => {
-                    return `<label class="check"> <input type="checkbox" name="meta-layer" value="${model}" checked> <span> ${model} </span> </label>`
+                    return `<label class="check"> <input type="checkbox" name="base-layer" value="${model}" checked> <span> ${model} </span> </label>`
                 }).join('\n')}
                 </div>
-                <div class="form-group" style="text-align: center">
+                <div class="form-group" >
                 <p class="labeller">Meta layer models</p>
                 ${predictionModels.map((model) => {
                     return `<label class="check"> <input type="checkbox" name="meta-layer" value="${model}" checked> <span> ${model} </span> </label>`
@@ -335,7 +519,7 @@
                 <div class="form-group">
                 <p class="labeller">Meta layer models</p> 
                 ${classificationModels.map((model) => {
-                    return `<label class="check"> <input type="checkbox" name="base-layer" value="${model}" checked> <span> ${model} </span> </label>`
+                    return `<label class="check"> <input type="checkbox" name="meta-layer" value="${model}" checked> <span> ${model} </span> </label>`
                 }).join('\n')}
                 </div>
             `
@@ -363,17 +547,8 @@
                
         predictionFunc()
 
-        defaultSettingRadioBtn.addEventListener('change', (e) => {
-            let elem = document.getElementById('custom-settings')
-            elem.style.display = "none"
-        })
 
-        
-        customSettingRadioBtn.addEventListener('change', (e) => {
-            let elem = document.getElementById('custom-settings')
-            elem.style.display = "block"
-        })
-    </script>
+</script>
+
 </body>
-
 </html>

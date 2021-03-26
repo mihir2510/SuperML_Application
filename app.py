@@ -7,8 +7,10 @@ port = 5000
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_object(settings)
 
-@app.route('/')
-def home():
+
+
+@app.route('/ensemble')
+def ensemble():
     # return {
     #     'this': 'works'
     # }
