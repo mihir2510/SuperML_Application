@@ -1,0 +1,173 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(../images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#regForm {
+    background-color: #ffffff;
+    margin: 50px auto;
+    font-family: Raleway;
+    padding: 40px;
+    width: 80%;
+    height: 100%;
+    min-width: 300px;
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+input {
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa;
+}
+
+
+/* Mark input boxes that gets an error on validation: */
+
+input.invalid {
+    background-color: #ffdddd;
+}
+
+
+/* Hide all steps by default: */
+
+.tab {
+    display: none;
+}
+
+button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#prevBtn {
+    background-color: #bbbbbb;
+}
+
+
+/* Make circles that indicate the steps of the form: */
+
+.step {
+    margin: 0 2px;
+    border: none;
+    opacity: 0.5;
+}
+
+.col-sm-2 {
+    background-color: #bbbbbb;
+    border: solid black 2px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.step.active {
+    opacity: 1;
+}
+
+
+/* Mark the steps that are finished and valid: */
+
+.step.finish {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.tab {
+    margin-top: 30px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.labeller {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #d2d2dc;
+    border-radius: 0
+}
+
+.card .card-body {
+    padding: 1.25rem 1.75rem
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem
+}
+
+.card .card-title {
+    color: #000000;
+    margin-bottom: 0.625rem;
+    text-transform: capitalize;
+    font-size: 0.875rem;
+    font-weight: 500
+}
+
+.card .card-description {
+    margin-bottom: .875rem;
+    font-weight: 400;
+    color: #76838f
+}
+
+p {
+    font-size: 0.875rem;
+    margin-bottom: .5rem;
+    line-height: 1.5rem
+}
+
+label.check {
+    cursor: pointer
+}
+
+label.check input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none
+}
+
+label.check span {
+    padding: 7px 14px;
+    border: 2px solid #03e9f4;
+    display: inline-block;
+    color: #03e9f4;
+    border-radius: 3px;
+    text-transform: uppercase
+}
+
+label.check input:checked+span {
+    border-color: #03e9f4;
+    background-color: #03e9f4;
+    color: #fff
+}

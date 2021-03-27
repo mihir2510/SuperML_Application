@@ -5,15 +5,86 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="../static/js/html2pdf.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+
+    <script>
+        function generatePDF() {
+            let content = document.getElementById("download-content");
+            let options = {
+                margin: 1,
+                filename: 'Results.pdf',
+                html2canvas: {
+                    scale: 1
+                },
+                jsPDF: {
+                    unit: 'cm',
+                    format: 'a3',
+                    orientation: 'landscape'
+                }
+            };
+
+            html2pdf().set(options).from(content).save();
+        }
+    </script>
 </head>
 
 <body>
-    <div class="preloader"></div>
-    <h1>Congratulations, your model is ready!</h1>
-    <h1>{{ metric }} : {{ metric_to_show }}</h1>
-    <a href="{{ excel_path }}">Download excel file</a>
-    <br>
-    <a href="{{ model_path }}">Download model</a>
+    <div class="container-fluid px-5">
+        <h1>Congratulations, your model is ready!</h1>
+        <h1>{{ metric }} : {{ metric_to_show }}</h1>
+
+        <div class="row d-flex justify-content-around">
+            <div class="col-4 text-center">
+                <a href="{{ excel_path }}">
+                    <button class="but"> <span></span><span></span><span></span><span></span>Download excel file</button>
+                </a>
+            </div>
+            <div class="col-4 text-center">
+                <a href="{{ model_path }}">
+                    <button class="but"><span></span><span></span><span></span><span></span>Download model</button>
+                </a>
+            </div>
+            <div class="col-4 text-center">
+
+                <button class="but" onclick="generatePDF()"><span></span><span></span><span></span><span></span>Download Report</button>
+            </div>
+        </div>
+
+        <div id="download-content">
+            <div class="header">
+                <p class="head-para"> SUPERML </p>
+                <p class="subhead-para"> Break the limitations of Machine Learning</p>
+            </div>
+            <div>{{graph_2d | safe}}</div>
+            <div>{{ graph_3d | safe}}</div>
+
+            <table class="table table-hover mt-3" style="color:black;background-color:white;border-radius: 5px;text-align: center;">
+                <thead>
+                    <tr>
+                        {% for column_name in stats.columns %}
+                        <th>{{ column_name }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index,rows in stats.iterrows() %}
+                    <tr>
+                        {% for column_name in stats.columns %}
+                        <td>{{ rows[column_name] }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
-<script>
-    < /html>
+
+</html>
