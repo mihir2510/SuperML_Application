@@ -20,18 +20,19 @@ body {
 }
 
 .head-para {
-    font-size: 50px;
+    font-size: 5rem;
     font-weight: bolder;
     color: white;
 }
 
 .subhead-para {
-    font-size: 30px;
+    font-size: 2rem;
     color: white;
 }
 
 p {
     color: white;
+    font-family: 'Franklin Gothic Medium';
 }
 
 .col-lg-6 {
@@ -40,8 +41,7 @@ p {
 }
 
 .col-headers {
-    font-size: 20px;
-    text-decoration: underline;
+    font-size: 1.5rem;
 }
 
 
@@ -178,4 +178,14 @@ p {
     100% {
         bottom: 100%;
     }
+}
+
+.home-cards {
+    display: none;
+    background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+    color: black !important;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    margin-right: 50px;
+    padding: 25px;
 }

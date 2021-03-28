@@ -196,7 +196,7 @@ def send_js(path):
 
 @app.route('/trial')
 def trial():
-    return render_template('trial.html')
+    return render_template('trial1.html')
 
 if __name__ == '__main__':
     app.run(port=port, debug=True)

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="/static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/static/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="/static/assets/vendor/line-awesome/css/line-awesome.min.css" rel="stylesheet">
+    <link href="/static/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/static/assets/css/style.css" rel="stylesheet">
+
+
+    <body style="background-image: none;">
+        <!-- <div class="container-fluid">
+        <div class="header">
+            <p class="head-para"> SUPERML </p>
+            <p class="subhead-para"> Break The Limitations Of Machine Learning</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <p class="col-headers"> Auto Ensemble </p>
+                <p> Create Machine Learning Model using this End-To-End Pipeline. This pipeline automates the Data Preprocessing, Feature Engineering, Hyperparameter Optimization and Ensembling of Various Machine Learning Algorithms.</p>
+                <a href="/ensemble"><button class='but'><span></span><span></span><span></span><span></span> Go to AutoML </button> </a>
+            </div>
+            <div class="col-lg-6">
+                <p class="col-headers"> Auto Trainer </p>
+                <p> This tool let's you play with different Machine Learning Algorithm, Feature Engineering Technqiues and Hyperparameter Optimization Methods. You can generate results for divergent combinations of various methods and models. </p>
+                <a href="/result-generator"><button class='but'> <span></span><span></span><span></span><span></span> Go To Auto Trainer</button> </a>
+            </div>
+        </div>
+
+
+    </div> -->
+        <header id="header" class="fixed-top">
+            <div class="container d-flex align-items-center"></div>
+            <p style="color: black;text-align: center;font-size: 3rem;margin: auto;">SUPERML</p>
+
+            <!-- Uncomment below if you prefer to use text as a logo -->
+            <!-- <h1 class="logo mr-auto"><a href="index.html">Butterfly</a></h1> -->
+
+            </div>
+        </header>
+        <!-- End Header -->
+
+        <!-- ======= Hero Section ======= -->
+        <section id="hero" class="d-flex align-items-center">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+                        <h1>Creating websites that make you stop & stare</h1>
+                        <h2>Accusantium quam, aliquam ultricies eget tempor id, aliquam eget nibh et. Maecen aliquam, risus at semper. Proin iaculis purus consequat sem cure digni ssim. Donec porttitora entum.</h2>
+                        <div><a href="#about" class="btn-get-started scrollto">Get Started</a></div>
+                    </div>
+                    <div class="col-lg-6 order-1 order-lg-2 hero-img">
+                        <img src="/static/assets/img/hero-img.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- End Hero -->
+
+
+
+
+        <style>
+            .features-boxed {
+                color: #313437;
+                background-color: #eef4f7;
+            }
+            
+            .features-boxed p {
+                color: #7d8285;
+            }
+            
+            .features-boxed h2 {
+                font-weight: bold;
+                margin-bottom: 40px;
+                padding-top: 40px;
+                color: inherit;
+            }
+            
+            @media (max-width:767px) {
+                .features-boxed h2 {
+                    margin-bottom: 25px;
+                    padding-top: 25px;
+                    font-size: 24px;
+                }
+            }
+            
+            .features-boxed .intro {
+                font-size: 16px;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .features-boxed .intro p {
+                margin-bottom: 0;
+            }
+            
+            .features-boxed .features {
+                padding: 50px 0;
+            }
+            
+            .features-boxed .item {
+                text-align: center;
+            }
+            
+            .features-boxed .item .box {
+                text-align: center;
+                padding: 30px;
+                background-color: #fff;
+                margin-bottom: 30px;
+            }
+            
+            .features-boxed .item .icon {
+                font-size: 60px;
+                color: #1485ee;
+                margin-top: 20px;
+                margin-bottom: 35px;
+            }
+            
+            .features-boxed .item .name {
+                font-weight: bold;
+                font-size: 18px;
+                margin-bottom: 8px;
+                margin-top: 0;
+                color: inherit;
+            }
+            
+            .features-boxed .item .description {
+                font-size: 15px;
+                margin-top: 15px;
+                margin-bottom: 20px;
+            }
+        </style>
+
+        <div class="features-boxed">
+            <div class="container">
+                <div class="intro">
+                    <h2 class="text-center">Features </h2>
+                    <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae.</p>
+                </div>
+                <div class="row justify-content-center features">
+                    <div class="col-sm-6 col-md-5 col-lg-4 item">
+                        <div class="box"><i class="fa fa-map-marker icon"></i>
+                            <h3 class="name">Works everywhere</h3>
+                            <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>
+                    </div>
+                    <div class="col-sm-6 col-md-5 col-lg-4 item">
+                        <div class="box"><i class="fa fa-clock-o icon"></i>
+                            <h3 class="name">Always available</h3>
+                            <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>
+                    </div>
+                    <div class="col-sm-6 col-md-5 col-lg-4 item">
+                        <div class="box"><i class="fa fa-list-alt icon"></i>
+                            <h3 class="name">Customizable </h3>
+                            <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>
+                    </div>
+                    <div class="col-sm-6 col-md-5 col-lg-4 item">
+                        <div class="box"><i class="fa fa-leaf icon"></i>
+                            <h3 class="name">Organic </h3>
+                            <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>
+                    </div>
+                    <div class="col-sm-6 col-md-5 col-lg-4 item">
+                        <div class="box"><i class="fa fa-plane icon"></i>
+                            <h3 class="name">Fast </h3>
+                            <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>
+                    </div>
+                    <div class="col-sm-6 col-md-5 col-lg-4 item">
+                        <div class="box"><i class="fa fa-phone icon"></i>
+                            <h3 class="name">Mobile-first</h3>
+                            <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu.</p><a href="#" class="learn-more">Learn more »</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+
+
+        <style>
+            .title {
+                font-weight: 700;
+                padding-top: 30px;
+            }
+            
+            .landing-page .section-team .team .team-player img {
+                max-width: 100px;
+            }
+            
+            .landing-page .section-team .team-player {
+                margin-bottom: 15px;
+            }
+            
+            .team-player {
+                margin-top: 50px;
+            }
+            
+            .category {
+                text-transform: capitalize;
+                font-weight: 700;
+                color: #9A9A9A;
+            }
+            
+            .text-primary {
+                color: #f96332 !important;
+            }
+            
+            .description {
+                color: #9A9A9A;
+                font-weight: 300;
+            }
+        </style>
+        <div class="section section-team text-center">
+            <div class="container">
+                <h2 class="title">Here is our team</h2>
+                <div class="team">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="team-player">
+                                <img src="https://raw.githack.com/creativetimofficial/now-ui-kit/master/assets/img/avatar.jpg" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+                                <h4 class="title">Romina Hadid</h4>
+                                <p class="category text-primary">Model</p>
+                                <p class="description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
+                                    <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-twitter"></i></a>
+                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-instagram"></i></a>
+                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-facebook-square"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="team-player">
+                                <img src="https://raw.githack.com/creativetimofficial/now-ui-kit/master/assets/img/ryan.jpg" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+                                <h4 class="title">Ryan Tompson</h4>
+                                <p class="category text-primary">Designer</p>
+                                <p class="description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
+                                    <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-twitter"></i></a>
+                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="team-player">
+                                <img src="https://raw.githack.com/creativetimofficial/now-ui-kit/master/assets/img/eva.jpg" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+                                <h4 class="title">Eva Jenner</h4>
+                                <p class="category text-primary">Fashion</p>
+                                <p class="description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
+                                    <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-google-plus"></i></a>
+                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-youtube"></i></a>
+                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="team-player">
+                                <img src="https://raw.githack.com/creativetimofficial/now-ui-kit/master/assets/img/eva.jpg" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
+                                <h4 class="title">Eva Jenner</h4>
+                                <p class="category text-primary">Fashion</p>
+                                <p class="description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
+                                    <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-google-plus"></i></a>
+                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-youtube"></i></a>
+                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+        <!-- Vendor JS Files -->
+        <script src="/static/assets/vendor/jquery/jquery.min.js"></script>
+        <script src="/static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+        <script src="/static/assets/vendor/php-email-form/validate.js"></script>
+        <script src="/static/assets/vendor/venobox/venobox.min.js"></script>
+        <script src="/static/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+        <script src="/static/assets/vendor/counterup/counterup.min.js"></script>
+        <script src="/static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="/static/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+
+        <!-- Template Main JS File -->
+        <script src="/static/assets/js/main.js"></script>
+    </body>
+
+</html>P

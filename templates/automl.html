@@ -13,7 +13,7 @@
 
     <form id="regForm" action="/process" method="post" enctype="multipart/form-data" required>
         <div class="row d-flex justify-content-around">
-            <div class="col-sm-2 step">
+            <div class="col-sm-2 step ">
                 <span class="">Upload Data</span>
             </div>
             <div class="col-sm-2 step">
@@ -38,13 +38,14 @@
 
             <div class="row">
                 <div class="form-group col-lg-6">
-                    <p class="labeller">Select the dataset to upload</p>
+
+                    <label for="label" class="labeller"> Select the dataset to upload</label>
                     <input type="file" name="dataset" accept=".csv" class="form-control" required>
                 </div>
 
                 <div class="form-group col-lg-6">
                     <label for="label" class="labeller"> Enter the target variable for the dataset</label>
-                    <input type="text" class="form-control" name="label" placeholder="" class="form-control" required>
+                    <input type="text" class="form-control" name="label" placeholder="" class="form-control" required style="height: 44px;">
                 </div>
             </div>
 
@@ -124,11 +125,11 @@
         </div>
 
         <div class="row d-flex justify-content-end">
-            <div style="margin-right: 5px;">
-                <button type="button" id="prevBtn" class="btn btn-secondary" onclick="nextPrev(-1)">Previous</button>
+            <div style="margin-right: 5px;" class="try">
+                <button type="button" id="prevBtn" class="button" onclick="nextPrev(-1)">Previous</button>
             </div>
-            <div class="change-button">
-                <button type="button" id="nextBtn" class="btn btn-danger" onclick="nextPrev(1)">Next</button>
+            <div class="change-button try">
+                <button type="button" id="nextBtn" class="button" onclick="nextPrev(1)">Next</button>
             </div>
         </div>
         <!-- Circles which indicates the steps of the form: -->
@@ -160,15 +161,15 @@
             if (n == (x.length - 1)) {
                 var groups = document.getElementsByClassName("change-button");
                 console.log(groups);
-                groups[0].innerHTML = '<button type="submit" class="btn btn-success" id="nextBtn" >Submit</button>';
+                groups[0].innerHTML = '<button type="submit" class="button" id="nextBtn" >Submit</button>';
             } else if (n == 1 && defaultSettingRadioBtn.checked) {
                 var groups = document.getElementsByClassName("change-button");
                 console.log(groups);
-                groups[0].innerHTML = '<button type="submit" class="btn btn-success" id="nextBtn" >Submit</button>';
+                groups[0].innerHTML = '<button type="submit" class="button" id="nextBtn" >Submit</button>';
                 visited = 1;
             } else {
                 var groups = document.getElementsByClassName("change-button");
-                groups[0].innerHTML = '<button type="button" class="btn btn-primary" id="nextBtn" class="btn btn-primary" onclick="nextPrev(1)">Next</button>';
+                groups[0].innerHTML = '<button type="button"  id="nextBtn" class="button" onclick="nextPrev(1)">Next</button>';
             }
             //... and run a function that will display the correct step indicator:
             fixStepIndicator(n)
@@ -251,13 +252,13 @@
 
         defaultSettingRadioBtn.addEventListener('change', (e) => {
             var groups = document.getElementsByClassName("change-button");
-            groups[0].innerHTML = '<button type="submit" class="btn btn-success" id="nextBtn" >Submit</button>';
+            groups[0].innerHTML = '<button type="submit" class="button" id="nextBtn" >Submit</button';
             console.log(groups);
         })
 
         customSettingRadioBtn.addEventListener('change', (e) => {
             var groups = document.getElementsByClassName("change-button");
-            groups[0].innerHTML = '<button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>';
+            groups[0].innerHTML = '<button type="button"  id="nextBtn" class="button" onclick="nextPrev(1)">Next</button>';
             console.log(groups);
         })
 

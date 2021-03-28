@@ -17,11 +17,16 @@
     <script>
         function generatePDF() {
             let content = document.getElementById("download-content");
+            var modified_content = document.createElement('div');
+            var trial_para = document.createElement('p');
+            trial_para.innerHTML = 'Ye maine modify karke dala';
+            modified_content.appendChild(trial_para);
+            modified_content.appendChild(content);
             let options = {
                 margin: 1,
                 filename: 'Results.pdf',
                 pagebreak: {
-                    after: ['table', '#graph', 'div']
+                    after: ['table', '#graph']
                 },
                 html2canvas: {
                     scale: 1
@@ -33,7 +38,7 @@
                 }
             };
 
-            html2pdf().set(options).from(content).save();
+            html2pdf().set(options).from(modified_content).save();
         }
     </script>
 </head>
@@ -44,17 +49,17 @@
         <h1>{{ metric }} : {{ metric_to_show }}</h1>
 
         <div class="row d-flex justify-content-around">
-            <div class="col-4 text-center">
+            <div class="col-md-4 text-center">
                 <a href="{{ excel_path }}">
                     <button class="but"> <span></span><span></span><span></span><span></span>Download excel file</button>
                 </a>
             </div>
-            <div class="col-4 text-center">
+            <div class="col-md-4 text-center">
                 <a href="{{ model_path }}">
                     <button class="but"><span></span><span></span><span></span><span></span>Download model</button>
                 </a>
             </div>
-            <div class="col-4 text-center">
+            <div class="col-md-4 text-center">
 
                 <button class="but" onclick="generatePDF()"><span></span><span></span><span></span><span></span>Download Report</button>
             </div>

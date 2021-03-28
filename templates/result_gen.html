@@ -41,20 +41,24 @@
 
             <div class="row">
                 <div class="form-group col-lg-6">
-                    <p class="labeller">Select the dataset to upload</p>
+                    <label class="labeller">Select the dataset to upload
+                        <a href="#" data-placement="right" data-toggle="tooltip" title="Upload the data to train the model (.csv file expected)"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a>
+                    </label>
                     <input type="file" name="dataset" accept=".csv" class="form-control" required>
                 </div>
 
                 <div class="form-group col-lg-6">
-                    <label for="label" class="labeller"> Enter the target variable for the dataset</label>
-                    <input type="text" class="form-control" name="label" placeholder="" class="form-control" required>
+                    <label for="label" class="labeller"> Enter the target variable for the dataset <a href="#" data-placement="right" data-toggle="tooltip" title="Enter the name of target column in the dataset"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a></label>
+                    <input type="text" class="form-control" name="label" placeholder="" class="form-control" required style="height: 44px;">
                 </div>
             </div>
 
         </div>
         <div class="tab">
             <div class="form-group">
-                <p class="labeller">Type of task</p>
+                <p class="labeller">Type of task
+                    <a href="#" data-placement="right" data-toggle="tooltip" title="Select the task prediction is for continuous values and classification is for discrete classes"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a>
+                </p>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" id="prediction" name="task" value="prediction" required checked>
                     <label class="form-check-label" for="prediction">Regression</label><br>
@@ -68,7 +72,9 @@
             </div>
 
             <div class="form-group">
-                <p class="labeller"> Select Settings </p>
+                <p class="labeller"> Select Settings
+                    <a href="#" data-placement="right" data-toggle="tooltip" title="Selecting custom will let you customize input variables for the pipeline"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a>
+                </p>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" id="default-option" name="settings" value="default" required checked>
                     <label class="form-check-label" for="default-option"> Default </label><br>
@@ -84,7 +90,9 @@
 
         <div class="tab">
             <div class="form-group">
-                <p class="labeller"> Feature Engineering Methods </p>
+                <p class="labeller"> Feature Engineering Methods
+                    <a href="#" data-placement="right" data-toggle="tooltip" title="Select Feature Engineering Methods to be used for combinations"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a>
+                </p>
 
                 <div>
                     <label class="check"> <input type="checkbox" name="fe_method" value="all_features" checked> <span>All Features</span> </label>
@@ -97,7 +105,9 @@
             </div>
 
             <div class="form-group">
-                <p class="labeller"> Hyper Parameter Optimization Methods </p>
+                <p class="labeller"> Hyper Parameter Optimization Methods
+                    <a href="#" data-placement="right" data-toggle="tooltip" title="Select Hyper Parameter Optimization Methods to be used for combinations"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a>
+                </p>
 
                 <div>
                     <label class="check"> <input type="checkbox" name="hpo_method" value="standard" checked> <span> No HPO </span> </label>
@@ -119,7 +129,9 @@
             <br><br>
 
             <div class="form-group">
-                <p class="labeller">Enter metric to use for sorting the results</p>
+                <p class="labeller">Enter metric to use for sorting the results
+                    <a href="#" data-placement="right" data-toggle="tooltip" title="Metric to be used for deciding best result"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a>
+                </p>
                 <div class="prediction prediction-metrics">
 
                 </div>
@@ -169,7 +181,10 @@
         showTab(currentTab); // Display the current tab
 
         function showTab(n) {
-            // This function will display the specified tab of the form...
+            $(document).ready(function() {
+                    $('[data-toggle="tooltip"]').tooltip();
+                })
+                // This function will display the specified tab of the form...
             var x = document.getElementsByClassName("tab");
             x[n].style.display = "block";
             let defaultSettingRadioBtn = document.getElementById('default-option')
