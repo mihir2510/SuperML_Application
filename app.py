@@ -12,6 +12,55 @@ import codecs
 from uuid import uuid4
 app.secret_key = 'my unobvious secret key'
 
+name_holder = {
+    'Linear Regression' : 'LiR',
+    'Ridge Regression' : "RR",
+    'Lasso Regression' : "LaR",
+    'Decision Tree Regressor' : 'DTR',
+    'Random Forest Regressor' : 'RFR',
+    'AdaBoostRegressor' : 'ABR',
+    'Extra Trees Regressor' : 'ETR',
+    'Bagging Regressor' : 'BG',
+    'Gradient Boosting Regressor' : 'GBR',
+    'Logistic Regression' : 'LoR',
+    'Random Forest Classifier' : 'RFC',
+    'AdaBoost Classifier' : 'ABC',
+    'Bagging Classifier' : 'BC',
+    'Gradient Boosting Classifier' : 'GBC',
+    'Extra Trees Classifier' : 'ETC',
+    'Decision Tree Classifier' : 'DTC',
+    'No HPO':'No HPO',
+    'Grid Search':'GS',
+    'Random Search':'RS',
+    'Bayesian Optimization':'BO',
+    'No Feature Engineering' : 'No FE',
+    'ANOVA' : 'ANOVA',
+    'ANOVA' : 'ANOVA',
+    'Correlation Method' : 'Corr',
+    'Pricipal Component Analysis' : 'PCA',
+    'Select From Model' : 'SFM'
+}
+
+column_holder={
+    'Meta Layer Model':'Meta Layer Model',
+    'Base Layer Models':'Base Layer Models',
+    'r2':'R2 Score',
+    'rmse':'RMSE',
+    'mae':'MAE',
+    'accuracy':'Accuracy',
+    'precision':'Precsion',
+    'precision_micro':'Precsion Micro',
+    'precision_macro':'Precison Macro',
+    'recall':'Recall',
+    'recall_micro':'Recall Micro',
+    'recall_macro':'Recall Macro',
+    'f1':'F1 Score',
+    'f1_micro':'F1 Score Micro',
+    'f1_macro':'F1 Score Macro',
+    'Estimator':'Estimator',
+    'Feature Engineering Method':'Feature Engineering Method',
+    'Hyperparameter Optimization Method':'Hyperparameter Optimization Method'
+}
 
 @app.route('/')
 def home():
@@ -55,9 +104,19 @@ def process():
     #     print('here',i)
     # print()
 
+    sortby[0]=column_holder[sortby[0]]
     myfile=read_excel(excel_path+'.xlsx')
-    plot_2d.bar_2d(myfile,Y=sortby[0],X='Meta Layer Model',groups=['Base Layer Models'],file_name='2d.html')
-    #plot_3d.surface_3d(stats, Z=sortby[0],  X='Meta Layer Model', Y=['Base Layer Models'],width=1000, height=1000)
+    
+    for ind in myfile.index:
+        myfile['Meta Layer Model'][ind]=name_holder[myfile['Meta Layer Model'][ind]]
+        x= myfile['Base Layer Models'][ind].split(", ")
+        for sp in range(len(x)):
+            x[sp]=name_holder[x[sp]]
+        myfile['Base Layer Models'][ind]=', '.join(x)
+
+
+    plot_2d.bar_2d(myfile,Y=sortby[0],X='Meta Layer Model',groups=['Base Layer Models'],file_name='2d.html',height=None,width=None)
+    plot_3d.surface_3d(myfile, Z=sortby[0],  X='Meta Layer Model', Y=['Base Layer Models'],file_name='3d.html',height=750,width=None)
     
     
 
@@ -69,12 +128,12 @@ def process():
     f = codecs.open("./2d.html",'r')
     graph_2d=f.read()
 
-    # f = codecs.open("./index.html",'r')
-    # graph_3d=f.read()
+    f = codecs.open("./3d.html",'r')
+    graph_3d=f.read()
 
     print(stats)
     # print(type(stats))
-    return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = formdata['metric-sortby'][0],graph_2d=graph_2d)
+    return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = formdata['metric-sortby'][0],graph_2d=graph_2d,graph_3d=graph_3d, task=task)
 
 @app.route('/result-generator')
 def result_gen():
@@ -114,13 +173,18 @@ def process_result_gen():
                                     test_size=test_size)
     print(stats.head())
 
+    sortby[0]=column_holder[sortby[0]]
     myfile=read_excel(excel_path+'.xlsx')
-    plot_2d.bar_2dsubplot(myfile,Y=sortby[0],plots=['Estimator','Feature Engineering Method','Hyperparameter Optimization Method'],file_name='2d.html')
+    for ind in myfile.index:
+        myfile['Estimator'][ind]=name_holder[myfile['Estimator'][ind]]
+        myfile['Feature Engineering Method'][ind]=name_holder[myfile['Feature Engineering Method'][ind]]
+        myfile['Hyperparameter Optimization Method'][ind]=name_holder[myfile['Hyperparameter Optimization Method'][ind]]
+    plot_2d.bar_2dsubplot(myfile,Y=sortby[0],plots=['Estimator','Feature Engineering Method','Hyperparameter Optimization Method'],file_name='2d.html',height=1500,width=None)
     f = codecs.open("./2d.html",'r')
     graph_2d=f.read()
 
-    plot_3d.surface_3d(stats, Z=sortby[0],  X='Estimator', Y=['Feature Engineering Method','Hyperparameter Optimization Method'],width=1000, height=1000)
-    f = codecs.open("./index.html",'r')
+    plot_3d.surface_3d(myfile, Z=sortby[0],  X='Estimator', Y=['Feature Engineering Method','Hyperparameter Optimization Method'],file_name='3d.html',height=750,width=None)
+    f = codecs.open("./3d.html",'r')
     graph_3d=f.read()
     metric_to_show = stats.iloc[0][sortby[0]]
     return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = sortby,graph_2d=graph_2d,graph_3d=graph_3d)

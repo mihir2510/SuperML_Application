@@ -30,9 +30,9 @@
         <div class="tab">
             <div class="">
                 <div class="text-center">
-                    <span> Instructions </span><br>
-                    <span>Someting</span><br>
-                    <span>Someting</span><br>
+                    <span> Upload a CSV (comma seperated values) dataset </span><br>
+                    <span> Target variable for the dataset is the variable to be predicted/classified </span><br>
+                    <br>
                 </div>
             </div>
 
@@ -89,7 +89,9 @@
             <br>
 
             <div class="form-group">
-                <p class="labeller">Value of n_splits</p>
+                <p class="labeller">Value of n_splits
+                    <a href="#" data-placement="right" data-toggle="tooltip" title="n_splits represents the number of splits to be made in dataset for cross validation"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a>
+                </p>
                 <input type="number" value="5" name="n_splits" class="form-control" required>
             </div>
 
@@ -123,10 +125,10 @@
 
         <div class="row d-flex justify-content-end">
             <div style="margin-right: 5px;">
-                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                <button type="button" id="prevBtn" class="btn btn-secondary" onclick="nextPrev(-1)">Previous</button>
             </div>
             <div class="change-button">
-                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                <button type="button" id="nextBtn" class="btn btn-danger" onclick="nextPrev(1)">Next</button>
             </div>
         </div>
         <!-- Circles which indicates the steps of the form: -->
@@ -140,6 +142,10 @@
 
         function showTab(n) {
             // This function will display the specified tab of the form...
+            $(document).ready(function() {
+                $('[data-toggle="tooltip"]').tooltip();
+            })
+            console.log('this', $('[data-toggle="tooltip"]'))
             var x = document.getElementsByClassName("tab");
             x[n].style.display = "block";
             let defaultSettingRadioBtn = document.getElementById('default-option')
@@ -154,15 +160,15 @@
             if (n == (x.length - 1)) {
                 var groups = document.getElementsByClassName("change-button");
                 console.log(groups);
-                groups[0].innerHTML = '<button type="submit" id="nextBtn" >Submit</button>';
+                groups[0].innerHTML = '<button type="submit" class="btn btn-success" id="nextBtn" >Submit</button>';
             } else if (n == 1 && defaultSettingRadioBtn.checked) {
                 var groups = document.getElementsByClassName("change-button");
                 console.log(groups);
-                groups[0].innerHTML = '<button type="submit" id="nextBtn" >Submit</button>';
+                groups[0].innerHTML = '<button type="submit" class="btn btn-success" id="nextBtn" >Submit</button>';
                 visited = 1;
             } else {
                 var groups = document.getElementsByClassName("change-button");
-                groups[0].innerHTML = '<button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>';
+                groups[0].innerHTML = '<button type="button" class="btn btn-primary" id="nextBtn" class="btn btn-primary" onclick="nextPrev(1)">Next</button>';
             }
             //... and run a function that will display the correct step indicator:
             fixStepIndicator(n)
@@ -197,14 +203,19 @@
                 // If a field is empty...
                 if (y[i].value == "") {
                     // add an "invalid" class to the field:
-                    y[i].className += " invalid";
+                    // y[i].className += " invalid";
+                    y[i].classList.add('invalid');
                     // and set the current valid status to false
                     valid = false;
+                } else {
+                    y[i].classList.remove('invalid');
+                    // y[i].className -=" "
                 }
             }
             // If the valid status is true, mark the step as finished and valid:
             if (valid) {
-                document.getElementsByClassName("step")[currentTab].className += " finish";
+                // document.getElementsByClassName("step")[currentTab].className += " finish";
+                document.getElementsByClassName("step")[currentTab].classList.add('finish');
             }
             return valid; // return the valid status
         }
@@ -213,10 +224,12 @@
             // This function removes the "active" class of all steps...
             var i, x = document.getElementsByClassName("step");
             for (i = 0; i < x.length; i++) {
-                x[i].className = x[i].className.replace(" active", "");
+                // x[i].className = x[i].className.replace(" active", "");
+                x[i].classList.remove('active');
             }
             //... and adds the "active" class on the current step:
-            x[n].className += " active";
+            // x[n].className += " active";
+            x[n].classList.add('active');
         }
 
         let predictionRadioBtn = document.getElementById('prediction')
@@ -227,7 +240,7 @@
             'RandomForestRegressor', 'AdaBoostRegressor', 'ExtraTreesRegressor'
         ]
         let classificationModels = ['LogisticRegression', 'RandomForestClassifier', 'AdaBoostClassifier',
-            'GradientBoostingClassifier', 'DecisionTreeClassifier'
+            'GradientBoostingClassifier', 'DecisionTreeClassifier', 'ExtraTreesClassifier'
         ]
 
         window.addEventListener('load', (e) => {
@@ -238,13 +251,13 @@
 
         defaultSettingRadioBtn.addEventListener('change', (e) => {
             var groups = document.getElementsByClassName("change-button");
-            groups[0].innerHTML = '<button type="submit" id="nextBtn" >Submit</button>';
+            groups[0].innerHTML = '<button type="submit" class="btn btn-success" id="nextBtn" >Submit</button>';
             console.log(groups);
         })
 
         customSettingRadioBtn.addEventListener('change', (e) => {
             var groups = document.getElementsByClassName("change-button");
-            groups[0].innerHTML = '<button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>';
+            groups[0].innerHTML = '<button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)">Next</button>';
             console.log(groups);
         })
 
@@ -265,13 +278,14 @@
                     // models change 
                 document.getElementById('prediction-models').innerHTML = `
                 <div class="form-group" >
-                <p class="labeller">Base layer models</p> 
+                <p class="labeller">Base layer models <a href="#" data-placement="right" data-toggle="tooltip" title="Base layer models are models which are used in the first layer of ensemble"><img id="info-base" src={{ url_for('static', filename='images/icons/info.svg') }} /></a></p>
+
                 ${predictionModels.map((model) => {
                     return `<label class="check"> <input type="checkbox" name="base-layer" value="${model}" checked> <span> ${model} </span> </label>`
                 }).join('\n')}
                 </div>
                 <div class="form-group" >
-                <p class="labeller">Meta layer models</p>
+                <p class="labeller">Meta layer models <a href="#" data-placement="right" data-toggle="tooltip" title="Meta layer models are models which are used in second layer of ensemble"><img id="info-base" src={{ url_for('static', filename='images/icons/info.svg') }} /></a></p>
                 ${predictionModels.map((model) => {
                     return `<label class="check"> <input type="checkbox" name="meta-layer" value="${model}" checked> <span> ${model} </span> </label>`
                 }).join('\n')}
@@ -309,13 +323,13 @@
             })
             document.getElementById('classification-models').innerHTML = `
                 <div class="form-group">
-                <p class="labeller">Base layer models</p>
+                <p class="labeller">Base layer models <a href="#" data-placement="right" data-toggle="tooltip" title="Base layer models are models which are used in the first layer of ensemble"><img id="info-base" src={{ url_for('static', filename='images/icons/info.svg') }} /></a></p>
                 ${classificationModels.map((model) => {
                     return `<label class="check"> <input type="checkbox" name="base-layer" value="${model}" checked> <span> ${model} </span> </label>`
                 }).join('\n')}
                 </div>
                 <div class="form-group">
-                <p class="labeller">Meta layer models</p> 
+                <p class="labeller">Meta layer models <a href="#" data-placement="right" data-toggle="tooltip" title="Meta layer models are models which are used in the second layer of ensemble"><img id="info-base" src={{ url_for('static', filename='images/icons/info.svg') }} /></a></p> 
                 ${classificationModels.map((model) => {
                     return `<label class="check"> <input type="checkbox" name="meta-layer" value="${model}" checked> <span> ${model} </span> </label>`
                 }).join('\n')}

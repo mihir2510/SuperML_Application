@@ -20,6 +20,9 @@
             let options = {
                 margin: 1,
                 filename: 'Results.pdf',
+                pagebreak: {
+                    after: ['table', '#graph', 'div']
+                },
                 html2canvas: {
                     scale: 1
                 },
@@ -62,10 +65,8 @@
                 <p class="head-para"> SUPERML </p>
                 <p class="subhead-para"> Break the limitations of Machine Learning</p>
             </div>
-            <div>{{graph_2d | safe}}</div>
-            <div>{{ graph_3d | safe}}</div>
 
-            <table class="table table-hover mt-3" style="color:black;background-color:white;border-radius: 5px;text-align: center;">
+            <table id="result-table" class="table table-hover mt-3" style="color:black;background-color:white;border-radius: 5px;text-align: center;">
                 <thead>
                     <tr>
                         {% for column_name in stats.columns %}
@@ -83,7 +84,15 @@
                     {% endfor %}
                 </tbody>
             </table>
+
+            <div id="legend">
+
+            </div>
+
+            <div id="graph" style="width: 100% !important;">{{graph_2d | safe}}</div>
+
         </div>
+        <div style="width: 100% !important;">{{ graph_3d | safe}}</div>
     </div>
 </body>
 

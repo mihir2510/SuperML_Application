@@ -44,23 +44,25 @@ input.invalid {
     display: none;
 }
 
-button {
-    background-color: #4CAF50;
+
+/* button {
+    background-color: black;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
     font-size: 17px;
     font-family: Raleway;
     cursor: pointer;
-}
+} */
 
 button:hover {
     opacity: 0.8;
 }
 
-#prevBtn {
+
+/* #prevBtn {
     background-color: #bbbbbb;
-}
+} */
 
 
 /* Make circles that indicate the steps of the form: */
@@ -81,6 +83,7 @@ button:hover {
 
 .step.active {
     opacity: 1;
+    background: #ffc107 !important;
 }
 
 
@@ -159,15 +162,15 @@ label.check input {
 
 label.check span {
     padding: 7px 14px;
-    border: 2px solid #03e9f4;
+    border: 2px solid #7952B3;
     display: inline-block;
-    color: #03e9f4;
+    color: #7952B3;
     border-radius: 3px;
     text-transform: uppercase
 }
 
 label.check input:checked+span {
-    border-color: #03e9f4;
-    background-color: #03e9f4;
+    border-color: #7952B3;
+    background-color: #7952B3;
     color: #fff
 }

@@ -33,9 +33,9 @@
         <div class="tab">
             <div class="">
                 <div class="text-center">
-                    <span> Instructions </span><br>
-                    <span>Someting</span><br>
-                    <span>Someting</span><br>
+                    <span> Upload a CSV (comma seperated values) dataset </span><br>
+                    <span> Target variable for the dataset is the variable to be predicted/classified </span><br>
+                    <br>
                 </div>
             </div>
 
@@ -133,27 +133,27 @@
 
         <div class="tab">
             <div class="form-group">
-                <label for="label"> Enter threshold</label>
+                <label for="label" class="labeller"> Enter threshold</label>
                 <input class="form-control" type="text" name="threshold" placeholder="Enter threshold" value="0.9" required>
             </div>
 
             <div class="form-group">
-                <label for="label"> Enter max evals </label>
+                <label for="label" class="labeller"> Enter max evals </label>
                 <input class="form-control" type="text" name="max_evals" placeholder="Enter max evals" value="500" required>
             </div>
 
             <div class="form-group">
-                <label for="label"> Test_size</label>
+                <label for="label" class="labeller"> Test_size</label>
                 <input class="form-control" type="text" name="test_size" placeholder="Enter test size" value="0.3" required>
             </div>
         </div>
 
         <div class="row d-flex justify-content-end">
             <div style="margin-right: 5px;">
-                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                <button type="button" id="prevBtn" class="btn btn-secondary" onclick="nextPrev(-1)">Previous</button>
             </div>
             <div class="change-button">
-                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                <button type="button" id="nextBtn" class="btn btn-danger" onclick="nextPrev(1)">Next</button>
             </div>
         </div>
         <!-- Circles which indicates the steps of the form: -->
@@ -161,6 +161,9 @@
     </form>
 
     <script>
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
         var currentTab = 0; // Current tab is set to be the first tab (0)
         var visited = 0;
         showTab(currentTab); // Display the current tab
@@ -181,15 +184,15 @@
             if (n == (x.length - 1)) {
                 var groups = document.getElementsByClassName("change-button");
                 console.log(groups);
-                groups[0].innerHTML = '<button type="submit" id="nextBtn" >Submit</button>';
+                groups[0].innerHTML = '<button type="submit" class="btn btn-success" id="nextBtn" >Submit</button>';
             } else if (n == 1 && defaultSettingRadioBtn.checked) {
                 var groups = document.getElementsByClassName("change-button");
                 console.log(groups);
-                groups[0].innerHTML = '<button type="submit" id="nextBtn" >Submit</button>';
+                groups[0].innerHTML = '<button type="submit" class="btn btn-success" id="nextBtn" >Submit</button>';
                 visited = 1;
             } else {
                 var groups = document.getElementsByClassName("change-button");
-                groups[0].innerHTML = '<button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>';
+                groups[0].innerHTML = '<button type="button" class="btn btn-primary" id="nextBtn" class="btn btn-primary" onclick="nextPrev(1)">Next</button>';
             }
             //... and run a function that will display the correct step indicator:
             fixStepIndicator(n)
@@ -224,14 +227,17 @@
                 // If a field is empty...
                 if (y[i].value == "") {
                     // add an "invalid" class to the field:
-                    y[i].className += " invalid";
+                    y[i].classList.add('invalid');
                     // and set the current valid status to false
                     valid = false;
+                } else {
+                    y[i].classList.remove('invalid');
+                    // y[i].className -=" "
                 }
             }
             // If the valid status is true, mark the step as finished and valid:
             if (valid) {
-                document.getElementsByClassName("step")[currentTab].className += " finish";
+                document.getElementsByClassName("step")[currentTab].classList.add('finish');
             }
             return valid; // return the valid status
         }
@@ -240,10 +246,10 @@
             // This function removes the "active" class of all steps...
             var i, x = document.getElementsByClassName("step");
             for (i = 0; i < x.length; i++) {
-                x[i].className = x[i].className.replace(" active", "");
+                x[i].classList.remove('active');
             }
             //... and adds the "active" class on the current step:
-            x[n].className += " active";
+            x[n].classList.add('active');
         }
 
         let defaultSettingRadioBtn = document.getElementById('default-option')
@@ -265,13 +271,13 @@
 
         defaultSettingRadioBtn.addEventListener('change', (e) => {
             var groups = document.getElementsByClassName("change-button");
-            groups[0].innerHTML = '<button type="submit" id="nextBtn" >Submit</button>';
+            groups[0].innerHTML = '<button type="submit" class="btn btn-success" id="nextBtn" >Submit</button>';
             console.log(groups);
         })
 
         customSettingRadioBtn.addEventListener('change', (e) => {
             var groups = document.getElementsByClassName("change-button");
-            groups[0].innerHTML = '<button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>';
+            groups[0].innerHTML = '<button type="button" class="btn btn-primary" id="nextBtn" class="btn btn-primary" onclick="nextPrev(1)">Next</button>';
             console.log(groups);
         })
 
