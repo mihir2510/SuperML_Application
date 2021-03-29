@@ -1,142 +1,68 @@
-    body {
-        background-image: url(../images/background.jpg);
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-attachment: fixed;
-        background-blend-mode: difference;
-    }
-    
-    .header {
-        margin-top: 50px;
-        text-align: center;
-    }
-    
-    .head-para {
-        font-size: 50px;
-        font-weight: bolder;
-        color: black;
-    }
-    
-    .subhead-para {
-        font-size: 30px;
-    }
-    /*Neon Buttons*/
-    
-    .but {
-        position: relative;
-        display: inline-block;
-        padding: 10px 30px;
-        margin: 50px;
-        color: white;
-        /*#03e9f4*/
-        text-decoration: none;
-        text-transform: uppercase;
-        transition: 0.5s;
-        overflow: hidden;
-        margin-right: 50px;
-        background: #050801;
-        border-radius: 5px;
-        z-index: +1;
-        box-shadow: 0 4px 8px 0 lightgrey, 0 6px 20px 0 lightgrey;
-    }
-    /* link Hover effect*/
-    
-    .but:hover {
-        background: #c24cf6;
-        color: #050801;
-        box-shadow: 0 0 5px #c24cf6, 0 0 25px #c24cf6, 0 0 50px #c24cf6, 0 0 200px white;
-        -webkit-box-reflect: below 1px linear-gradient(transition, #0005)
-    }
-    /* add animation */
-    
-    .but:nth-child(2) {
-        filter: hue-rotate(270deg);
-    }
-    
-    .but span {
-        position: absolute;
-        display: block;
-    }
-    
-    .but span:nth-child(1) {
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, white);
-        animation: animate1 1s linear infinite;
-    }
-    /* add keyframes for animation*/
-    
-    @keyframes animate1 {
-        0% {
-            left: -100%;
-        }
-        50%,
-        100% {
-            left: 100%;
-        }
-    }
-    /* 2nd line animation*/
-    
-    .but span:nth-child(2) {
-        top: -100%;
-        right: 0;
-        width: 2px;
-        height: 100%;
-        background: linear-gradient(180deg, transparent, white);
-        animation: animate2 1s linear infinite;
-        animation-delay: 0.25s;
-    }
-    /* add keyframes*/
-    
-    @keyframes animate2 {
-        0% {
-            top: -100%;
-        }
-        50%,
-        100% {
-            top: 100%;
-        }
-    }
-    /* 3rd line animation*/
-    
-    .but span:nth-child(3) {
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(270deg, transparent, white);
-        animation: animate3 1s linear infinite;
-    }
-    
-    @keyframes animate3 {
-        0% {
-            right: -100%;
-        }
-        50%,
-        100% {
-            right: 100%;
-        }
-    }
-    /* 4th line animation*/
-    
-    .but span:nth-child(4) {
-        bottom: -100%;
-        left: 0;
-        width: 2px;
-        height: 100%;
-        background: linear-gradient(360deg, transparent, white);
-        animation: animate4 1s linear infinite;
-        animation-delay: 0.75s;
-    }
-    
-    @keyframes animate4 {
-        0% {
-            bottom: -100%;
-        }
-        50%,
-        100% {
-            bottom: 100%;
-        }
-    }
+body {
+    background-color: aliceblue;
+}
+
+.header {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.head-para {
+    font-size: 50px;
+    font-weight: bolder;
+    color: black;
+}
+
+.subhead-para {
+    font-size: 30px;
+}
+
+.button {
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    padding: 10px;
+    margin: 15px;
+}
+
+.button:hover {
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.score-card {
+    padding: 10px;
+    border-radius: 20px;
+    margin: 20px;
+    font-family: 'Raleway';
+}
+
+.description {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.description-container {
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.result-header {
+    font-size: 40px;
+    font-weight: bold;
+}

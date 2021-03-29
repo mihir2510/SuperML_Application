@@ -1,7 +1,8 @@
-from flask import Flask, jsonify, request, render_template, send_from_directory, session
+from flask import Flask, jsonify, request, render_template, send_from_directory, session, flash
 import settings
 from auto_machine_learning.automl.automl import automl_run
 from pandas import read_csv,read_excel
+import pandas as pd
 from auto_machine_learning.automl.auto_model_trainer import auto_trainer
 from auto_machine_learning.visualization import plot_2d,plot_3d
 port = 5000
@@ -65,7 +66,7 @@ column_holder={
 @app.route('/')
 def home():
     session['uid']=str(uuid4())
-    return render_template('home.html')
+    return render_template('index.html')
 
 @app.route('/ensemble')
 def ensemble():
@@ -78,7 +79,6 @@ def process():
     label = request.form['label']
     task = request.form['task']
     formdata = dict(list(request.form.lists()))
-    # return formdata
     uploaded_file = request.files['dataset']
     dataset_path = './data/{}'.format(uploaded_file.filename or 'dataset.csv')
     uploaded_file.save(dataset_path)
@@ -91,18 +91,18 @@ def process():
     base_layer_models = formdata.get('base-layer', [])
     meta_models = formdata.get('meta-layer', [])
     sortby = formdata.get('metric-sortby')
-    stats, _ = automl_run(dataset, label, task,
-        base_layer_models = base_layer_models if formdata['settings'][0] == 'custom' else model_list,
-        meta_layer_models = meta_models if formdata['settings'][0] == 'custom' else model_list,
-        download_model = pickle_path,
-        metric=formdata['metric'][0],
-        sortby=sortby[0],
-        excel_file=excel_path
-    )
-    # print(stats)
-    # for i in stats:
-    #     print('here',i)
-    # print()
+    try:
+        stats, _ = automl_run(dataset, label, task,
+            base_layer_models = base_layer_models if formdata['settings'][0] == 'custom' else model_list,
+            meta_layer_models = meta_models if formdata['settings'][0] == 'custom' else model_list,
+            download_model = pickle_path,
+            metric=formdata['metric'][0],
+            sortby=sortby[0],
+            excel_file=excel_path
+        )
+    except:
+        return render_template('automl.html', message='Please check the label given and make sure the csv file is valid!')
+    
 
     sortby[0]=column_holder[sortby[0]]
     myfile=read_excel(excel_path+'.xlsx')
@@ -114,22 +114,27 @@ def process():
             x[sp]=name_holder[x[sp]]
         myfile['Base Layer Models'][ind]=', '.join(x)
 
-
+    print(sortby[0])
     plot_2d.bar_2d(myfile,Y=sortby[0],X='Meta Layer Model',groups=['Base Layer Models'],file_name='2d.html',height=None,width=None)
-    plot_3d.surface_3d(myfile, Z=sortby[0],  X='Meta Layer Model', Y=['Base Layer Models'],file_name='3d.html',height=750,width=None)
+    f = codecs.open("./2d.html",'r')
+    graph_2d=f.read()
+    graph_3d=None
+    if len(list(pd.unique(stats['Base Layer Models'])))==1 or len(list(pd.unique(stats['Meta Layer Model'])))==1:
+        graph_3d=None
+    else:
+        plot_3d.surface_3d(myfile, Z=sortby[0],  X='Meta Layer Model', Y=['Base Layer Models'],file_name='3d.html',height=750,width=None)
+        f = codecs.open("./3d.html",'r')
+        graph_3d=f.read()
     
-    
-
+    print(sortby[0])
 
     metric_to_show = stats.iloc[0][formdata['metric-sortby'][0]]
     # return send_from_directory(filename=pickle_path+'.sav', directory='.')
     # return send_from_directory('.', pickle_path+'.sav', as_attachment=True)
 
-    f = codecs.open("./2d.html",'r')
-    graph_2d=f.read()
 
-    f = codecs.open("./3d.html",'r')
-    graph_3d=f.read()
+
+
 
     print(stats)
     # print(type(stats))
@@ -162,15 +167,18 @@ def process_result_gen():
     max_evals = int(request.form['max_evals'])
     test_size = float(request.form['test_size'])
     print(sortby)
-    stats, model = auto_trainer(dataset,label,task, feature_engineering_methods=feature_engineering_methods, 
-                                    hpo_methods=hpo_methods, 
-                                    models=models, 
-                                    sortby = sortby[0], 
-                                    download_model = pickle_path, 
-                                    excel_file=excel_path,
-                                    threshold=threshold,
-                                    max_evals=max_evals,
-                                    test_size=test_size)
+    try:
+        stats, model = auto_trainer(dataset,label,task, feature_engineering_methods=feature_engineering_methods, 
+                                        hpo_methods=hpo_methods, 
+                                        models=models, 
+                                        sortby = sortby[0], 
+                                        download_model = pickle_path, 
+                                        excel_file=excel_path,
+                                        threshold=threshold,
+                                        max_evals=max_evals,
+                                        test_size=test_size)
+    except:
+        return render_template('automl.html', message='Please check the label given and make sure the csv file is valid!')
     print(stats.head())
 
     sortby[0]=column_holder[sortby[0]]
@@ -182,10 +190,16 @@ def process_result_gen():
     plot_2d.bar_2dsubplot(myfile,Y=sortby[0],plots=['Estimator','Feature Engineering Method','Hyperparameter Optimization Method'],file_name='2d.html',height=1500,width=None)
     f = codecs.open("./2d.html",'r')
     graph_2d=f.read()
+    graph_3d=None
 
-    plot_3d.surface_3d(myfile, Z=sortby[0],  X='Estimator', Y=['Feature Engineering Method','Hyperparameter Optimization Method'],file_name='3d.html',height=750,width=None)
-    f = codecs.open("./3d.html",'r')
-    graph_3d=f.read()
+    if  len(list(pd.unique(stats['Estimator'])))==1 or (len(list(pd.unique(stats['Feature Engineering Method'])))==1 and len(list(pd.unique(stats['Hyperparameter Optimization Method'])))==1):
+        graph_3d=None
+        print(len(list(pd.unique(stats['Estimator']))),len(list(pd.unique(stats['Feature Engineering Method']))), len(list(pd.unique(stats['Hyperparameter Optimization Method']))) )
+    else:
+        plot_3d.surface_3d(myfile, Z=sortby[0],  X='Estimator', Y=['Feature Engineering Method','Hyperparameter Optimization Method'],file_name='3d.html',height=750,width=None)
+        f = codecs.open("./3d.html",'r')
+        graph_3d=f.read()
+
     metric_to_show = stats.iloc[0][sortby[0]]
     return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = sortby,graph_2d=graph_2d,graph_3d=graph_3d)
 
@@ -193,10 +207,14 @@ def process_result_gen():
 def send_js(path):
     return send_from_directory('.', path)
 
+@app.route('/start')
+def start():
+    return render_template('start.html')
 
 @app.route('/trial')
 def trial():
-    return render_template('trial1.html')
+    x=0
+    return render_template('trial.html')
 
 if __name__ == '__main__':
     app.run(port=port, debug=True)

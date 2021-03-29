@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="../static/js/html2pdf.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+
 
     <script>
         function generatePDF() {
             let content = document.getElementById("download-content");
-            var modified_content = document.createElement('div');
-            var trial_para = document.createElement('p');
-            trial_para.innerHTML = 'Ye maine modify karke dala';
-            modified_content.appendChild(trial_para);
-            modified_content.appendChild(content);
+            let copiedContent = content.cloneNode(true);
+            let modifiedContent = document.createElement('div');
+            let para = document.createElement('p')
+            para.innerHTML = "Ye maine firse dala hai";
+            modifiedContent.appendChild(para);
+            modifiedContent.appendChild(copiedContent);
             let options = {
                 margin: 1,
                 filename: 'Results.pdf',
@@ -38,41 +38,100 @@
                 }
             };
 
-            html2pdf().set(options).from(modified_content).save();
+            html2pdf().set(options).from(modifiedContent).save();
         }
     </script>
+
 </head>
 
+
 <body>
-    <div class="container-fluid px-5">
-        <h1>Congratulations, your model is ready!</h1>
-        <h1>{{ metric }} : {{ metric_to_show }}</h1>
+    <div class="container-fluid px-5" style="margin-top: 100px;">
+
+        <nav class="fixed-top navbar navbar-expand-lg navbar-light bg-light" style="padding:0px 15px 0px 15px;">
+            <a class="navbar-brand" style="color: black;text-align: center;font-size: 2.5rem;margin: 15px;" href="#">SUPERML</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./#team">Our Team</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav flex-row ml-auto" style="margin-right: 10px;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mihir2510/AutoML_Application">
+                            <svg class="navbar-nav-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 499.36" width="20" height="20" focusable="false"><title>GitHub</title><path d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z" fill="currentColor" fill-rule="evenodd"></path></svg>
+                        </a>
+
+                    </li>
+                </ul>
+                <a href="/start" class="btn btn-primary" style="margin: 0 10px 10px 0;">Get Started</a>
+
+            </div>
+            <!-- <p style=" color: black;text-align: center;font-size: 3rem;margin: auto; ">SUPERML</p> -->
+
+            <!-- Uncomment below if you prefer to use text as a logo -->
+            <!-- <h1 class="logo mr-auto "><a href="index.html ">Butterfly</a></h1> -->
+
+
+        </nav>
+
+
+        <div class="header">
+            <p class="head-para"> SUPERML </p>
+            <p class="subhead-para"> Break the limitations of Machine Learning</p>
+        </div>
+
+        <p class="subhead-para text-center">Congratulations, your model is ready! 💯</p>
+        <!-- <h1>{{ metric }} : {{ metric_to_show }}</h1> -->
+        <div class="row justify-content-around">
+            {% set data = dict(stats[stats.columns[2 + ('Feature Engineering Method' in stats.columns):]].iloc[0]) %}
+            {% set colors = ['#b2a0fe', '#ffd27b', '#ccff90', '#f28b82']*3 %}
+            {% set emojis = ['🔥', '🎉', '🙌', '👏']*3 %}
+            {% set i = namespace(value=0) %}
+            {% for metric in data %}
+                <div class="score-card" style="background: {{ colors[i.value] }};">
+                    <p style="margin:0px">{{ metric }} : {{ data[metric] }} {{ emojis[i.value] }}</p>
+                </div>
+                {% set i.value = (i.value + 1) %}
+            {% endfor %}
+        </div>
 
         <div class="row d-flex justify-content-around">
             <div class="col-md-4 text-center">
                 <a href="{{ excel_path }}">
-                    <button class="but"> <span></span><span></span><span></span><span></span>Download excel file</button>
+                    <button class="button"> Download excel file</button>
                 </a>
             </div>
             <div class="col-md-4 text-center">
                 <a href="{{ model_path }}">
-                    <button class="but"><span></span><span></span><span></span><span></span>Download model</button>
+                    <button class="button">Download model</button>
                 </a>
             </div>
             <div class="col-md-4 text-center">
 
-                <button class="but" onclick="generatePDF()"><span></span><span></span><span></span><span></span>Download Report</button>
+                <button class="button" onclick="generatePDF()">Download Report</button>
             </div>
         </div>
 
         <div id="download-content">
-            <div class="header">
-                <p class="head-para"> SUPERML </p>
-                <p class="subhead-para"> Break the limitations of Machine Learning</p>
-            </div>
 
+            <div class="description" style="text-align: center;">
+                <p class="result-header"> Results </p>
+                <p> The table below is a score board which represents the performance of all the combinations possible made using the given input.<br>
+                    Various metrics are given in the table and the entries are sorted as per the metric given by you while filling the form.
+                </p>
+            </div>
             <table id="result-table" class="table table-hover mt-3" style="color:black;background-color:white;border-radius: 5px;text-align: center;">
-                <thead>
+                <thead style="color:white;background-color:black">
                     <tr>
                         {% for column_name in stats.columns %}
                         <th>{{ column_name }}</th>
@@ -93,11 +152,18 @@
             <div id="legend">
 
             </div>
-
+            <div class="description" style="text-align: center;">
+                <p class="result-header"> Graphs </p>
+                <p> Below are the 2d graphs displaying the performance of the various combinations of models and methods given as input. <br>
+                    For each graph a different variable is taken on the X-Axis and the groups are formed by the combinations of remaining variables.
+                </p>
+            </div>
             <div id="graph" style="width: 100% !important;">{{graph_2d | safe}}</div>
 
         </div>
-        <div style="width: 100% !important;">{{ graph_3d | safe}}</div>
+        {% if graph_3d!=None%}
+        <div style="width: 100% !important; margin-top: 50px;">{{ graph_3d | safe}}</div>
+        {%endif%}
     </div>
 </body>
 

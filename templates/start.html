@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<div class="header">
+    <p class="head-para"> SUPERML </p>
+    <p class="subhead-para"> Break The Limitations Of Machine Learning</p>
+</div>
+
+<div class="row d-flex flex-row justify-content-center align-items-center">
+    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center home-cards">
+        <p class="col-headers"> Auto Ensemble </p>
+        <p> Create Machine Learning Model using this End-To-End Pipeline. This pipeline automates the Data Preprocessing, Feature Engineering, Hyperparameter Optimization and Ensembling of Various Machine Learning Algorithms.</p>
+        <a href="/ensemble"><button class='button'><span></span><span></span><span></span><span></span> Go to AutoML </button> </a>
+    </div>
+    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center home-cards " style="background-color: #ffd27b;">
+        <p class="col-headers"> Auto Trainer </p>
+        <p> This tool let's you play with different Machine Learning Algorithm, Feature Engineering Technqiues and Hyperparameter Optimization Methods. You can generate results for divergent combinations of various methods and models. </p>
+        <a href="/result-generator"><button class='button'> <span></span><span></span><span></span><span></span> Go To Auto Trainer</button> </a>
+    </div>
+</div>
+
+</div>
+
+ <footer id="footer" style="padding: 10px;
+    bottom: 0;
+    position: fixed;
+    width: 100%; background: #F8F9FA;">
+<div class="container text-center">
+            <div class="copyright" style="float: none;">
+                &copy; Copyright <strong><span>SuperML</span></strong>. All Rights Reserved
+            </div>
+           
+        </div>
+    </footer>
+{% endblock %}
+
+  
+

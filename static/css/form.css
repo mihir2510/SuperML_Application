@@ -2,12 +2,8 @@
     box-sizing: border-box;
 }
 
-body {
-    background-image: url(../images/background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-}
+html,
+body {}
 
 #regForm {
     background-color: #ffffff;
@@ -15,9 +11,10 @@ body {
     font-family: Raleway;
     padding: 40px;
     width: 80%;
-    height: 100%;
     min-width: 300px;
     border-radius: 10px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 175px;
 }
 
 h1 {
@@ -68,13 +65,12 @@ button:hover {
 /* Make circles that indicate the steps of the form: */
 
 .step {
-    margin: 0 2px;
+    margin: 5px 2px;
     border: none;
 }
 
 .col-sm-2 {
     background-color: #bbbbbb;
-    border: solid black 2px;
     padding: 10px;
     text-align: center;
     border-radius: 5px;
@@ -199,6 +195,7 @@ label.check input:checked+span {
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
+    margin: 10px;
 }
 
 .button:hover {
