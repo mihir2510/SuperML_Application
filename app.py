@@ -13,15 +13,18 @@ import codecs
 from uuid import uuid4
 app.secret_key = 'my unobvious secret key'
 
+import warnings
+warnings.filterwarnings("ignore")
+
 name_holder = {
     'Linear Regression' : 'LiR',
     'Ridge Regression' : "RR",
     'Lasso Regression' : "LaR",
     'Decision Tree Regressor' : 'DTR',
     'Random Forest Regressor' : 'RFR',
-    'AdaBoostRegressor' : 'ABR',
+    'AdaBoost Regressor' : 'ABR',
     'Extra Trees Regressor' : 'ETR',
-    'Bagging Regressor' : 'BG',
+    'Bagging Regressor' : 'BR',
     'Gradient Boosting Regressor' : 'GBR',
     'Logistic Regression' : 'LoR',
     'Random Forest Classifier' : 'RFC',
@@ -35,7 +38,6 @@ name_holder = {
     'Random Search':'RS',
     'Bayesian Optimization':'BO',
     'No Feature Engineering' : 'No FE',
-    'ANOVA' : 'ANOVA',
     'ANOVA' : 'ANOVA',
     'Correlation Method' : 'Corr',
     'Pricipal Component Analysis' : 'PCA',
@@ -114,19 +116,19 @@ def process():
             x[sp]=name_holder[x[sp]]
         myfile['Base Layer Models'][ind]=', '.join(x)
 
-    print(sortby[0])
-    plot_2d.bar_2d(myfile,Y=sortby[0],X='Meta Layer Model',groups=['Base Layer Models'],file_name='2d.html',height=None,width=None)
+    #print(sortby[0])
+    plot_2d.bar_2d(myfile,Y=sortby[0],X='Meta Layer Model',groups=['Base Layer Models'],file_name='2d.html',download_png='fi1.png',height=1500,width=None)
     f = codecs.open("./2d.html",'r')
     graph_2d=f.read()
     graph_3d=None
     if len(list(pd.unique(stats['Base Layer Models'])))==1 or len(list(pd.unique(stats['Meta Layer Model'])))==1:
         graph_3d=None
     else:
-        plot_3d.surface_3d(myfile, Z=sortby[0],  X='Meta Layer Model', Y=['Base Layer Models'],file_name='3d.html',height=750,width=None)
+        plot_3d.surface_3d(myfile, Z=sortby[0],  X='Meta Layer Model', Y=['Base Layer Models'],file_name='3d',height=750,width=None)
         f = codecs.open("./3d.html",'r')
         graph_3d=f.read()
     
-    print(sortby[0])
+    #print(sortby[0])
 
     metric_to_show = stats.iloc[0][formdata['metric-sortby'][0]]
     # return send_from_directory(filename=pickle_path+'.sav', directory='.')
@@ -166,7 +168,7 @@ def process_result_gen():
     threshold = float(request.form['threshold'])
     max_evals = int(request.form['max_evals'])
     test_size = float(request.form['test_size'])
-    print(sortby)
+    #print(sortby)
     try:
         stats, model = auto_trainer(dataset,label,task, feature_engineering_methods=feature_engineering_methods, 
                                         hpo_methods=hpo_methods, 
@@ -179,7 +181,7 @@ def process_result_gen():
                                         test_size=test_size)
     except:
         return render_template('automl.html', message='Please check the label given and make sure the csv file is valid!')
-    print(stats.head())
+    #print(stats.head())
 
     sortby[0]=column_holder[sortby[0]]
     myfile=read_excel(excel_path+'.xlsx')
@@ -187,21 +189,22 @@ def process_result_gen():
         myfile['Estimator'][ind]=name_holder[myfile['Estimator'][ind]]
         myfile['Feature Engineering Method'][ind]=name_holder[myfile['Feature Engineering Method'][ind]]
         myfile['Hyperparameter Optimization Method'][ind]=name_holder[myfile['Hyperparameter Optimization Method'][ind]]
-    plot_2d.bar_2dsubplot(myfile,Y=sortby[0],plots=['Estimator','Feature Engineering Method','Hyperparameter Optimization Method'],file_name='2d.html',height=1500,width=None)
+    plot_2d.bar_2dsubplot(myfile,Y=sortby[0],plots=['Estimator','Feature Engineering Method','Hyperparameter Optimization Method'],file_name='2d.html',download_png='fi1.png',height=1500,width=None)
     f = codecs.open("./2d.html",'r')
     graph_2d=f.read()
     graph_3d=None
 
     if  len(list(pd.unique(stats['Estimator'])))==1 or (len(list(pd.unique(stats['Feature Engineering Method'])))==1 and len(list(pd.unique(stats['Hyperparameter Optimization Method'])))==1):
         graph_3d=None
-        print(len(list(pd.unique(stats['Estimator']))),len(list(pd.unique(stats['Feature Engineering Method']))), len(list(pd.unique(stats['Hyperparameter Optimization Method']))) )
+        #print(len(list(pd.unique(stats['Estimator']))),len(list(pd.unique(stats['Feature Engineering Method']))), len(list(pd.unique(stats['Hyperparameter Optimization Method']))) )
     else:
-        plot_3d.surface_3d(myfile, Z=sortby[0],  X='Estimator', Y=['Feature Engineering Method','Hyperparameter Optimization Method'],file_name='3d.html',height=750,width=None)
+        myfile.rename(columns={'Feature Engineering Method': 'FE','Hyperparameter Optimization Method':'HPO'}, inplace=True)
+        plot_3d.surface_3d(myfile, Z=sortby[0],  X='Estimator', Y=['FE','HPO'],file_name='3d',height=750,width=None)
         f = codecs.open("./3d.html",'r')
         graph_3d=f.read()
 
     metric_to_show = stats.iloc[0][sortby[0]]
-    return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = sortby,graph_2d=graph_2d,graph_3d=graph_3d)
+    return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = sortby,graph_2d=graph_2d,graph_3d=graph_3d,task=task)
 
 @app.route('/<path:path>')
 def send_js(path):

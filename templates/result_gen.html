@@ -11,13 +11,13 @@
 
 
 <body class="" style="background-color:#ffd27b">
-    <nav class="fixed-top navbar navbar-expand-lg navbar-light bg-light" style="padding:0px 15px 0px 15px;">
+    <nav class="fixed-top navbar navbar-expand-lg navbar-light bg-light" style="padding:0px 15px 0px 15px;    box-shadow: 0 0 2rem 0 rgb(0 0 0 / 20%);">
         <a class="navbar-brand" style="color: black;text-align: center;font-size: 2.5rem;margin: 15px;" href="/">SUPERML</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" style="font-size: 1.2rem;">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
@@ -31,20 +31,19 @@
             <ul class="navbar-nav flex-row ml-auto" style="margin-right: 10px;">
                 <li class="nav-item">
                     <a class="nav-link" href="https://github.com/mihir2510/AutoML_Application">
-                        <svg class="navbar-nav-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 499.36" width="20" height="20" focusable="false"><title>GitHub</title><path d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z" fill="currentColor" fill-rule="evenodd"></path></svg>
+                        <svg class="navbar-nav-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 499.36" width="25" height="25" focusable="false"><title>GitHub</title><path d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z" fill="currentColor" fill-rule="evenodd"></path></svg>
                     </a>
 
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://pypi.org/project/auto-machine-learning/">
+                        <img src="/static/images/python.svg" class="navbar-nav-svg" width="25" height="25" focusable="false">
+                    </a>
+                </li>
             </ul>
-            <a href="/start" class="btn btn-primary" style="margin: 0 10px 10px 0;">Get Started</a>
+            <a href="/start" class="btn btn-primary" style="margin: 0 10px 10px 0;font-size: 1.2rem !important;">Get Started</a>
 
         </div>
-        <!-- <p style=" color: black;text-align: center;font-size: 3rem;margin: auto; ">SUPERML</p> -->
-
-        <!-- Uncomment below if you prefer to use text as a logo -->
-        <!-- <h1 class="logo mr-auto "><a href="index.html ">Butterfly</a></h1> -->
-
-
     </nav>
 
 
@@ -93,7 +92,8 @@
                 </div>
 
                 <div class="form-group col-lg-6">
-                    <label for="label" class="labeller"> Enter the target variable for the dataset <a href="#" data-placement="right" data-toggle="tooltip" title="Enter the name of target column in the dataset"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a></label>
+                    <label for="label" class="labeller"> Enter the target variable for the dataset 
+                        <a href="#" data-placement="right" data-toggle="tooltip" title="Enter the name of target column in the dataset"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a></label>
                     <input type="text" class="form-control" name="label" placeholder="" class="form-control" required style="height: 44px;">
                 </div>
             </div>
@@ -108,6 +108,7 @@
                     <input class="form-check-input" type="radio" id="prediction" name="task" value="prediction" required checked>
                     <label class="form-check-label" for="prediction">Regression</label><br>
                 </div>
+
 
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" id="classification" name="task" value="classification" required>
@@ -190,23 +191,25 @@
 
         <div class="tab">
             <div class="form-group">
-                <label for="label" class="labeller"> Enter threshold</label>
+                <label for="label" class="labeller"> Enter threshold 
+                <a href="#" data-placement="right" data-toggle="tooltip" title="This variable decides the limit of covariance of features with each other"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a>
+                </label>
                 <input class="form-control" type="text" name="threshold" placeholder="Enter threshold" value="0.9" required>
             </div>
 
             <div class="form-group">
-                <label for="label" class="labeller"> Enter max evals </label>
+                <label for="label" class="labeller"> Enter max evals <a href="#" data-placement="right" data-toggle="tooltip" title="Maximum number of iterations to be performed during Hyper Parameter Optimization process"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a></label>
                 <input class="form-control" type="text" name="max_evals" placeholder="Enter max evals" value="500" required>
             </div>
 
             <div class="form-group">
-                <label for="label" class="labeller"> Test_size</label>
+                <label for="label" class="labeller"> Test_size <a href="#" data-placement="right" data-toggle="tooltip" title="Fraction of data to be used for testing purposes"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a></label>
                 <input class="form-control" type="text" name="test_size" placeholder="Enter test size" value="0.3" required>
             </div>
         </div>
 
         <div class="row d-flex justify-content-end">
-            <div  class="try">
+            <div class="try">
                 <button type="button" id="prevBtn" class="button" onclick="nextPrev(-1)">Previous</button>
             </div>
             <div class="change-button">
@@ -316,12 +319,39 @@
         let customSettingRadioBtn = document.getElementById('custom-option')
         let predictionRadioBtn = document.getElementById('prediction')
         let classificationRadioBtn = document.getElementById('classification')
-        let predictionModels = ['LinearRegression', 'Lasso', 'Ridge', 'DecisionTreeRegressor',
-            'RandomForestRegressor', 'AdaBoostRegressor', 'ExtraTreesRegressor'
+
+
+        let predictionModels = [
+            'LinearRegression',
+            'Lasso',
+            'Ridge',
+            'DecisionTreeRegressor',
+            'RandomForestRegressor',
+            'AdaBoostRegressor',
+            'ExtraTreesRegressor'
         ]
+        let predictionModelNames = {
+            'LinearRegression': 'Linear Regression',
+            'Lasso': 'Lasso Regression',
+            'Ridge': 'Ridge Regression',
+            'DecisionTreeRegressor': 'Decision Tree Regression',
+            'RandomForestRegressor': 'Random Forest Regression',
+            'AdaBoostRegressor': 'AdaBoost Regression',
+            'ExtraTreesRegressor': 'Extra Trees Regression'
+        }
+
         let classificationModels = ['LogisticRegression', 'RandomForestClassifier', 'AdaBoostClassifier',
-            'GradientBoostingClassifier', 'DecisionTreeClassifier'
+            'GradientBoostingClassifier', 'DecisionTreeClassifier', 'ExtraTreesClassifier'
         ]
+
+        let classificationModelNames = {
+            'LogisticRegression': 'Logistic Regression',
+            'RandomForestClassifier': 'Random Forest Classifier',
+            'AdaBoostClassifier': 'AdaBoost Classifier',
+            'GradientBoostingClassifier': 'Gradient Boosting Classifier',
+            'DecisionTreeClassifier': 'Decision Tree Classifier',
+            'ExtraTreesClassifier': 'Extra Trees Classifier'
+        }
 
         window.addEventListener('load', (e) => {
             document.getElementsByTagName('form')[0].reset();
@@ -357,9 +387,9 @@
                     // models change 
                 document.getElementById('prediction-models').innerHTML = `
                 <div class="form-group">
-                <p class="labeller">Model to be used for generating results</p> 
+                <p class="labeller" >Model to be used for generating results <a href="#" data-placement="right" data-toggle="tooltip" title="Algorithms to be trained with combinations of Feature Engineering and Hyper Parameter Optimization methods"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a></p> 
                     ${predictionModels.map((model) => {
-                        return `<label class="check"> <input type="checkbox" name="models" value="${model}" checked> <span> ${model} </span> </label>`
+                        return `<label class="check"> <input type="checkbox" name="models" value="${model}" checked> <span> ${predictionModelNames[model]} </span> </label>`
                     }).join('\n')}
                 </div>
                 `
@@ -396,9 +426,9 @@
                 })
                 document.getElementById('classification-models').innerHTML = `
                     <div class='form-group'>
-                    <p class="labeller">Model to be used for generating results</p> 
+                    <p class="labeller">Model to be used for generating results <a href="#" data-placement="right" data-toggle="tooltip" title="Algorithms to be trained with combinations of Feature Engineering and Hyper Parameter Optimization methods"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a></p> 
                     ${classificationModels.map((model) => {
-                        return `<label class="check"> <input type="checkbox" name="models" value="${model}" checked> <span> ${model} </span> </label>`
+                        return `<label class="check"> <input type="checkbox" name="models" value="${model}" checked> <span> ${classificationModelNames} </span> </label>`
                     }).join('\n')}
                     </div>
                 `
@@ -427,15 +457,15 @@
 
         predictionFunc()
     </script>
- <footer id="footer" style="padding: 10px;
+    <footer id="footer" style="padding: 10px;
     bottom: 0;
     position:fixed;
     width: 100%; background: #F8F9FA;">
-<div class="container text-center">
+        <div class="container text-center">
             <div class="copyright" style="float: none;">
                 &copy; Copyright <strong><span>SuperML</span></strong>. All Rights Reserved
             </div>
-           
+
         </div>
     </footer>
 </body>
