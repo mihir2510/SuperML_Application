@@ -230,10 +230,10 @@ def send_js(path):
 def start():
     return render_template('start.html')
 
-@app.route('/trial')
-def trial():
-    x=0
-    return render_template('trial.html')
+@app.route('/documentation')
+def documentation():
+    
+    return render_template('documentation.html')
 
 if __name__ == '__main__':
     app.run(port=port, debug=True)
