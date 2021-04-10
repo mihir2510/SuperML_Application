@@ -428,7 +428,7 @@
                     <div class='form-group'>
                     <p class="labeller">Model to be used for generating results <a href="#" data-placement="right" data-toggle="tooltip" title="Algorithms to be trained with combinations of Feature Engineering and Hyper Parameter Optimization methods"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a></p> 
                     ${classificationModels.map((model) => {
-                        return `<label class="check"> <input type="checkbox" name="models" value="${model}" checked> <span> ${classificationModelNames} </span> </label>`
+                        return `<label class="check"> <input type="checkbox" name="models" value="${model}" checked> <span> ${classificationModelNames[model]} </span> </label>`
                     }).join('\n')}
                     </div>
                 `

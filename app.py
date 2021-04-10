@@ -12,6 +12,7 @@ import time
 import codecs
 from uuid import uuid4
 app.secret_key = 'my unobvious secret key'
+from time import time
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -93,6 +94,7 @@ def process():
     base_layer_models = formdata.get('base-layer', [])
     meta_models = formdata.get('meta-layer', [])
     sortby = formdata.get('metric-sortby')
+    start = time()
     try:
         stats, _ = automl_run(dataset, label, task,
             base_layer_models = base_layer_models if formdata['settings'][0] == 'custom' else model_list,
@@ -104,8 +106,14 @@ def process():
         )
     except:
         return render_template('automl.html', message='Please check the label given and make sure the csv file is valid!')
-    
+    time_taken = time()-start
+    unit = 'seconds'
+    if time_taken>120:
+        time_taken = time_taken/60
+        unit = 'minutes'
 
+    time_taken = round(time_taken,4)
+    time_taken = "{} ".format(time_taken)+unit
     sortby[0]=column_holder[sortby[0]]
     myfile=read_excel(excel_path+'.xlsx')
     
@@ -117,8 +125,8 @@ def process():
         myfile['Base Layer Models'][ind]=', '.join(x)
 
     #print(sortby[0])
-    plot_2d.bar_2d(myfile,Y=sortby[0],X='Meta Layer Model',groups=['Base Layer Models'],file_name='2d.html',download_png='fi1.png',height=1500,width=None)
-    f = codecs.open("./2d.html",'r')
+    plot_2d.bar_2d(myfile,Y=sortby[0],X='Meta Layer Model',groups=['Base Layer Models'],file_name='2dplot',download_png='2dplot',height=500,width=None)
+    f = codecs.open("./2dplot.html",'r')
     graph_2d=f.read()
     graph_3d=None
     if len(list(pd.unique(stats['Base Layer Models'])))==1 or len(list(pd.unique(stats['Meta Layer Model'])))==1:
@@ -140,7 +148,7 @@ def process():
 
     print(stats)
     # print(type(stats))
-    return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = formdata['metric-sortby'][0],graph_2d=graph_2d,graph_3d=graph_3d, task=task)
+    return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = formdata['metric-sortby'][0],graph_2d=graph_2d,graph_3d=graph_3d, task=task, time_taken = time_taken)
 
 @app.route('/result-generator')
 def result_gen():
@@ -169,6 +177,7 @@ def process_result_gen():
     max_evals = int(request.form['max_evals'])
     test_size = float(request.form['test_size'])
     #print(sortby)
+    start = time()
     try:
         stats, model = auto_trainer(dataset,label,task, feature_engineering_methods=feature_engineering_methods, 
                                         hpo_methods=hpo_methods, 
@@ -182,15 +191,22 @@ def process_result_gen():
     except:
         return render_template('automl.html', message='Please check the label given and make sure the csv file is valid!')
     #print(stats.head())
+    time_taken = time()-start
+    unit = 'sseconds'
+    if time_taken>120:
+        time_taken = time_taken/60
+        unit = 'minutes'
 
+    time_taken = round(time_taken,4)
+    time_taken = "{} ".format(time_taken)+unit
     sortby[0]=column_holder[sortby[0]]
     myfile=read_excel(excel_path+'.xlsx')
     for ind in myfile.index:
         myfile['Estimator'][ind]=name_holder[myfile['Estimator'][ind]]
         myfile['Feature Engineering Method'][ind]=name_holder[myfile['Feature Engineering Method'][ind]]
         myfile['Hyperparameter Optimization Method'][ind]=name_holder[myfile['Hyperparameter Optimization Method'][ind]]
-    plot_2d.bar_2dsubplot(myfile,Y=sortby[0],plots=['Estimator','Feature Engineering Method','Hyperparameter Optimization Method'],file_name='2d.html',download_png='fi1.png',height=1500,width=None)
-    f = codecs.open("./2d.html",'r')
+    plot_2d.bar_2dsubplot(myfile,Y=sortby[0],plots=['Estimator','Feature Engineering Method','Hyperparameter Optimization Method'],file_name='2dsubplot',download_png='2dsubplot',height=1500,width=None)
+    f = codecs.open("./2dsubplot.html",'r')
     graph_2d=f.read()
     graph_3d=None
 
@@ -204,7 +220,7 @@ def process_result_gen():
         graph_3d=f.read()
 
     metric_to_show = stats.iloc[0][sortby[0]]
-    return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = sortby,graph_2d=graph_2d,graph_3d=graph_3d,task=task)
+    return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = sortby,graph_2d=graph_2d,graph_3d=graph_3d,task=task, time_taken=time_taken)
 
 @app.route('/<path:path>')
 def send_js(path):

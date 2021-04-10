@@ -22,8 +22,11 @@
             let pillContainer = document.getElementById("pill-container");
             let description = document.createElement('div');
             let pillHeader = document.createElement('p');
-            let trial = document.createElement('img');
-            trial.src = '../fig1.png';
+            // let trial = document.createElement('img');
+            // trial.src = '../2dplot.png';
+            // let originalGraph = document.getElementById('graph');
+            // let copiedGraph = originalGraph.cloneNode(true);
+            // copiedGraph.style = 'width:50% !important;';
 
             description.style = "text-align: center; margin-top: 100px; ";
             description.classList.add('container')
@@ -31,7 +34,7 @@
             descPara.style = "margin-bottom: 100px;";
             descPara.innerHTML = "We developed this application as our final year project, keeping in mind the problems faced by people while creating models.<br> With this project we aim to tackle the limitations of Machine Learning by automating the whole pipeline thus enabling people even from non tech background to use Machine Learning for their use cases."
             description.appendChild(descPara);
-            trial.style = 'height:1000px;width:1000px'
+            // trial.style = 'height:1000px;width:1000px;';
 
             pillHeader.style = "font-size: 40px; font-weight: 700;"
             pillHeader.innerHTML = "Performance of the best Model"
@@ -48,7 +51,7 @@
             descriptionPage.appendChild(copiedPillContainer);
             modifiedContent.appendChild(descriptionPage);
             modifiedContent.appendChild(copiedContent);
-            modifiedContent.appendChild(trial)
+            // modifiedContent.appendChild(copiedGraph)
             let options = {
                 margin: 1,
                 filename: 'Results.pdf',
@@ -61,10 +64,9 @@
                 jsPDF: {
                     unit: 'cm',
                     format: 'a3',
-                    orientation: 'portrait'
+                    orientation: 'landscape'
                 }
             };
-
             html2pdf().set(options).from(modifiedContent).save();
         }
     </script>
@@ -117,13 +119,18 @@
 
         <p class="subhead-para text-center">Congratulations, your model is ready! 💯</p>
         <!-- <h1>{{ metric }} : {{ metric_to_show }}</h1> -->
-        <div id="pill-container" class="row justify-content-around">
-            {% set data = dict(stats[stats.columns[2 + ('Feature Engineering Method' in stats.columns):]].iloc[0]) %} {% set colors = ['#b2a0fe', '#ffd27b', '#ccff90', '#f28b82']*3 %} {% set emojis = ['🔥', '🎉', '🙌', '👏']*3 %} {% set i = namespace(value=0) %}
-            {% for metric in data %}
-            <div class="score-card" style="background: {{ colors[i.value] }};">
-                <p style="margin:0px">{{ metric }} : {{ data[metric] }} {{ emojis[i.value] }}</p>
+        <div id="pill-container">
+            <div class="row justify-content-around">
+                {% set data = dict(stats[stats.columns[2 + ('Feature Engineering Method' in stats.columns):]].iloc[0]) %} {% set colors = ['#b2a0fe', '#ffd27b', '#ccff90', '#f28b82']*3 %} {% set emojis = ['🔥', '🎉', '🙌', '👏']*3 %} {% set i = namespace(value=0) %}
+                {% for metric in data %}
+                <div class="score-card" style="background: {{ colors[i.value] }};">
+                    <p style="margin:0px">{{ metric }} : {{ data[metric] }} {{ emojis[i.value] }}</p>
+                </div>
+                {% set i.value = (i.value + 1) %} {% endfor %}
             </div>
-            {% set i.value = (i.value + 1) %} {% endfor %}
+            <br>
+            <br>
+            <p style="text-align: center; font-size: 1.2rem; font-weight: bold;"> The total time taken by the pipeline is {{time_taken}}. </p>
         </div>
 
         <div class="row d-flex justify-content-around">
@@ -142,6 +149,12 @@
                 <button class="button" onclick="generatePDF()">Download Report</button>
             </div>
         </div>
+
+        <div class="description" style="text-align: center;">
+            <p class="result-header"> Correlation Matrix </p>
+            <p> Below is the correlation matrix of the given dataset</p>
+        </div>
+        <div id="correlation_matrix"><img src="../correlation_matrix.png" style="height: 100%;width: 100%;"></div>
 
         <div id="download-content">
 
@@ -173,12 +186,9 @@
             <div id="legend">
 
             </div>
+
             <div class="description" style="text-align: center;">
-                <p class="result-header"> Graphs </p>
-                <p> Below is the correlation matrix of the given dataset</p>
-            </div>
-            <div id="correlation_matrix"><img src="../correlation_matrix.png" style="height: 100%;width: 100%;"></div>
-            <div class="description" style="text-align: center;">
+                <p class="result-header" style="font-size: 30px;"> Graphs </p>
                 <p> Below are the 2d graphs displaying the performance of the various combinations of models and methods given as input. <br> For each graph a different variable is taken on the X-Axis and the groups are formed by the combinations of remaining
                     variables.
                 </p>
@@ -201,6 +211,7 @@
                             <li>AdaBoostRegressor : ABR</li>
                             <li>Extra Trees Regressor : ETR</li>
                             <li>Bagging Regressor : BG</li>
+                            <li>Gradient Boosting Regressor : GBR</li>
                         </ul>
                     </div>
 
@@ -212,11 +223,11 @@
                             <li>Logistic Regression : LoR</li>
                             <li>Random Forest Classifier : RFC</li>
                             <li>AdaBoost Classifier : ABC</li>
-                            <li>Decision Tree Regressor : DTR</li>
-                            <li>Random Forest Regressor : RFR</li>
                             <li>Bagging Classifier : BC</li>
                             <li>Extra Trees Classifier : ETC</li>
                             <li>Decision Tree Classifier : DTC</li>
+                            <li>Gradient Boosting Classifier : GBC</li>
+
                         </ul>
                     </div>
                     {%endif%}
@@ -244,11 +255,13 @@
 
                 </div>
             </div>
+            <div id="graph">{{graph_2d | safe}}</div>
+
 
 
 
         </div>
-        <div id="graph" style="width: 100% !important;">{{graph_2d | safe}}</div>
+
         {% if graph_3d!=None%}
         <div style="width: 100% !important; margin-top: 50px;">{{ graph_3d | safe}}</div>
         {%endif%}

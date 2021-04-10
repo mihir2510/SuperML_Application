@@ -134,3 +134,11 @@ dmypy.json
 *.csv
 *.xlsx
 *.sav
+
+#plots
+2dplot.html
+2dplot.png
+3d.html
+correlation_matrix.png
+2dsubplot.html
+2dsubplot.png
