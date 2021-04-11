@@ -224,7 +224,7 @@
                                 <h4>What is AutoML??</h4>
                                 <p>Automated machine learning (AutoML) is the process of automating the process of applying machine learning to real-world problems. AutoML covers the complete pipeline from the raw dataset to the deployable machine learning
                                     model. AutoML was proposed as an artificial intelligence-based solution to the ever-growing challenge of applying machine learning. The high degree of automation in AutoML allows non-experts to make use of machine learning
-                                    models and techniques without requiring becoming an expert in the field first. Automating the process of applying machine learning end-to-end additionally offers the advantages of producing simpler solutions, faster
+                                    models and techniques without requiring to become an expert in the field first. Automating the process of applying machine learning end-to-end additionally offers the advantages of producing simpler solutions, faster
                                     creation of those solutions, and models that often outperform hand-designed models.
                                 </p>
 
@@ -296,7 +296,7 @@
                                         <li>3. Lasso Regression : 'Lasso'</li>
                                         <li>4. Decision Tree Regressor : 'DecisionTreeRegressor'</li>
                                         <li>5. Random Forest Regressor : 'RandomForestRegressor'</li>
-                                        <li>6. AdaBoostRegressor : 'AdaBoostRegressor'</li>
+                                        <li>6. AdaBoost Regressor : 'AdaBoostRegressor'</li>
                                         <li>7. Extra Trees Regressor : 'ExtraTreesRegressor'</li>
                                         <li>8. Bagging Regressor : 'BaggingRegressor'</li>
                                         <li>9. Gradient Boosting Regressor : 'GradientBoostingRegressor'</li>
@@ -599,8 +599,8 @@
                         </div>
                         <!-- end row -->
                         <h4 id="line5-part1">anova</h4>
-                        <h5> - &nbsp anova_classifier(dataset,label,anova_estimator='RandomForestClassifier')</h5>
-                        <h5> - &nbsp anova_regressor(dataset,label,anova_estimator='RandomForestRegressor')</h5>
+                        <h5> - &nbsp anova_classifier(dataset, label, anova_estimator='RandomForestClassifier')</h5>
+                        <h5> - &nbsp anova_regressor(dataset, label, anova_estimator='RandomForestRegressor')</h5>
 
                         <p>Anova (analysis of variance) is used to select features. We have Anova for Regression and Classifications Tasks</p>
 
@@ -619,7 +619,7 @@
                         </pre>
                         <br>
                         <br>
-                        <h4 id="line5-part2">correlation(dataset,label,threshold=0.90)</h4>
+                        <h4 id="line5-part2">correlation(dataset, label, threshold=0.90)</h4>
 
                         <p>Uses correlation between features to drop highly correlated feature and return the processed data</p>
 
@@ -904,7 +904,7 @@
                         <br>
                         <h4 id="line9-part2" style="font-weight: bold;">Auto Model Trainer</h4>
                         <hr>
-                        <h4>auto_trainer(dataset,label,task,feature_engineering_methods=default_feature_engineering_methods, hpo_methods=default_hyperparamter_methods, models=[] ,anova_estimator=None, sortby=None, download_model = None,excel_file=None, threshold=0.9,
+                        <h4>auto_trainer(dataset, label, task, feature_engineering_methods=default_feature_engineering_methods, hpo_methods=default_hyperparamter_methods, models=[], anova_estimator=None, sortby=None, download_model = None, excel_file=None, threshold=0.9,
                             max_evals=500, test_size=0.3, random_state=1)</h4>
                         <p>Implements the whole automl pipeline. Consists of the stages: Datapreprocessing -> Feature Engineering -> HPO. Helps in generating results for various combinations of Feature Engineering methods, HPO methods and models.</p>
                         <pre class="brush: html">
