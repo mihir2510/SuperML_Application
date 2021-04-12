@@ -49,11 +49,13 @@
         </div>
     </nav>
     {% if message %}
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="top:125px; position:absolute">
-        <strong>Error Occured!</strong> {{message}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div class='d-flex justify-content-around'>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="top:115px; position:absolute">
+            <strong>Error Occured!</strong> {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     </div>
     {% endif %}
     <form id="regForm" action="/process" method="post" enctype="multipart/form-data" required>

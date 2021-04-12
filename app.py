@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template, send_from_directory, session, flash
+from flask import Flask, jsonify, request, render_template, send_from_directory, session, flash, redirect, url_for, session
 import settings
 from auto_machine_learning.automl.automl import automl_run
 from pandas import read_csv,read_excel
@@ -73,6 +73,10 @@ def home():
 
 @app.route('/ensemble')
 def ensemble():
+    if 'message-ensemble' in session:
+        message=session['message-ensemble']
+        session.pop('message-ensemble',None)
+        return render_template('automl.html',message = message)
     return render_template('automl.html')
 
 @app.route('/process', methods=['POST'])
@@ -96,7 +100,7 @@ def process():
     sortby = formdata.get('metric-sortby')
     start = time()
     try:
-        stats, _ = automl_run(dataset, label, task,
+        _, stats, list_of_new_features = automl_run(dataset, label, task,
             base_layer_models = base_layer_models if formdata['settings'][0] == 'custom' else model_list,
             meta_layer_models = meta_models if formdata['settings'][0] == 'custom' else model_list,
             download_model = pickle_path,
@@ -105,7 +109,9 @@ def process():
             excel_file=excel_path
         )
     except:
-        return render_template('automl.html', message='Please check the label given and make sure the csv file is valid!')
+        session['message-ensemble'] = 'Please check the label given and make sure the csv file is valid!'
+        return redirect(url_for('.ensemble'))
+        #return render_template('automl.html', message='Please check the label given and make sure the csv file is valid!')
     time_taken = time()-start
     unit = 'seconds'
     if time_taken>120:
@@ -147,11 +153,16 @@ def process():
 
 
     print(stats)
+    print(list_of_new_features)
     # print(type(stats))
-    return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = formdata['metric-sortby'][0],graph_2d=graph_2d,graph_3d=graph_3d, task=task, time_taken = time_taken)
+    return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = formdata['metric-sortby'][0],graph_2d=graph_2d,graph_3d=graph_3d, task=task, time_taken = time_taken,list_of_new_features=list_of_new_features)
 
 @app.route('/result-generator')
 def result_gen():
+    if 'message-autotrainer' in session:
+        message=session['message-autotrainer']
+        session.pop('message-autotrainer',None)
+        return render_template('result_gen.html', message=message)
     return render_template('result_gen.html')
 
 @app.route('/process-result-gen', methods=['POST'])
@@ -179,7 +190,7 @@ def process_result_gen():
     #print(sortby)
     start = time()
     try:
-        stats, model = auto_trainer(dataset,label,task, feature_engineering_methods=feature_engineering_methods, 
+        model,stats,list_of_new_features = auto_trainer(dataset,label,task, feature_engineering_methods=feature_engineering_methods, 
                                         hpo_methods=hpo_methods, 
                                         models=models, 
                                         sortby = sortby[0], 
@@ -189,7 +200,8 @@ def process_result_gen():
                                         max_evals=max_evals,
                                         test_size=test_size)
     except:
-        return render_template('automl.html', message='Please check the label given and make sure the csv file is valid!')
+        session['message-autotrainer'] = 'Please check the label given and make sure the csv file is valid!'
+        return redirect(url_for('.result_gen'))
     #print(stats.head())
     time_taken = time()-start
     unit = 'sseconds'
@@ -220,7 +232,9 @@ def process_result_gen():
         graph_3d=f.read()
 
     metric_to_show = stats.iloc[0][sortby[0]]
-    return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = sortby,graph_2d=graph_2d,graph_3d=graph_3d,task=task, time_taken=time_taken)
+    print(list_of_new_features)
+    stats.drop('Selected Features',axis='columns',inplace=True)
+    return render_template('results.html', excel_path=excel_path+'.xlsx', model_path=pickle_path+'.sav', stats=stats, metric_to_show = metric_to_show, metric = sortby,graph_2d=graph_2d,graph_3d=graph_3d,task=task, time_taken=time_taken,list_of_new_features=list_of_new_features)
 
 @app.route('/<path:path>')
 def send_js(path):

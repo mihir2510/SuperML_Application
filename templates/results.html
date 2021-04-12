@@ -11,9 +11,52 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="../static/js/html2pdf.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
 
     <script>
+        let team_info = document.createElement('div');
+        team_info.innerHTML = `
+                <br>
+                <p style="font-weight:bold; text-align:center;font-size:25px"> Our Team </p>
+                
+                <div class="row d-flex justify-content-around">
+                    <div class="col-sm-3">
+                        <p>Zenil Haria </p>
+                        <a href="https://www.linkedin.com/in/zenil-haria-861566170/" class="btn btn-primary btn-icon btn-round"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:zenilharia06@gmail.com" class="btn btn-primary btn-icon btn-round"><i class="fab fa-google"></i></a>
+                        <a href="https://github.com/zenilharia26" class="btn btn-primary btn-icon btn-round"><i class="fab fa-github"></i></a>
+                    
+                        
+                    </div>
+                   <div class="col-sm-3">
+                        <p>Mihir Gada </p>
+                        <a href="https://www.linkedin.com/in/mihir2510/" class="btn btn-primary btn-icon btn-round"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:mihirgada25@gmail.com" class="btn btn-primary btn-icon btn-round"><i class="fab fa-google"></i></a>
+                        <a href="https://mihirgada.tech" class="btn btn-primary btn-icon btn-round"><i class="fas fa-globe"></i></a>
+                        <a href="https://github.com/mihir2510" class="btn btn-primary btn-icon btn-round"><i class="fab fa-github"></i></a>
+                    
+                    </div>
+                    <div class="col-sm-3">
+                        <p>Arnav Mankad </p>
+                        <a href="https://www.linkedin.com/in/arnav-mankad-8b38a519a/" class="btn btn-primary btn-icon btn-round"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:mankadarnav@gmail.com" class="btn btn-primary btn-icon btn-round"><i class="fab fa-google"></i></a>
+                        <a href="https://github.com/ArnAV318" class="btn btn-primary btn-icon btn-round"><i class="fab fa-github"></i></a>
+                    
+                    </div>
+                    <div class="col-sm-3">
+                        <p>Kaustubh Damania</p>
+                        <a href="https://www.linkedin.com/in/kaustubh-damania/" class="btn btn-primary btn-icon btn-round"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:kaustubh.damania@gmail.com" class="btn btn-primary btn-icon btn-round"><i class="fab fa-google"></i></a>
+                        <a href="https://kaustubhdamania.github.io" class="btn btn-primary btn-icon btn-round"><i class="fas fa-globe"></i></a>
+                        <a href="https://github.com/KaustubhDamania" class="btn btn-primary btn-icon btn-round"><i class="fab fa-github"></i></a>
+                    </div>
+
+                </div>
+                <br>
+                <br>
+            `;
+
         function generatePDF() {
             let content = document.getElementById("download-content");
             let copiedContent = content.cloneNode(true);
@@ -28,17 +71,20 @@
             // let copiedGraph = originalGraph.cloneNode(true);
             // copiedGraph.style = 'width:50% !important;';
 
-            description.style = "text-align: center; margin-top: 100px; ";
+            description.style = "text-align: center; margin-top: 25px; ";
             description.classList.add('container')
             let descPara = document.createElement('p');
-            descPara.style = "margin-bottom: 100px;";
+            descPara.style = "margin-bottom: 25px;";
             descPara.innerHTML = "We developed this application as our final year project, keeping in mind the problems faced by people while creating models.<br> With this project we aim to tackle the limitations of Machine Learning by automating the whole pipeline thus enabling people even from non tech background to use Machine Learning for their use cases."
             description.appendChild(descPara);
+
+            description.appendChild(team_info);
             // trial.style = 'height:1000px;width:1000px;';
 
             pillHeader.style = "font-size: 40px; font-weight: 700;"
             pillHeader.innerHTML = "Performance of the best Model"
             description.appendChild(pillHeader);
+
 
 
             let copiedHeader = header.cloneNode(true);
@@ -134,6 +180,7 @@
             <br>
             <br>
             <p style="text-align: center; font-size: 1.2rem; font-weight: bold;"> The total time taken by the pipeline is {{time_taken}}. </p>
+            <p style="text-align: center; font-size: 1.2rem; font-weight: bold;"> The list is new features is {{list_of_new_features}}. </p>
         </div>
 
         <div class="row d-flex justify-content-around">

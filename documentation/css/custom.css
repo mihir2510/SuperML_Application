@@ -59,7 +59,8 @@ html.dark .btn-primary {
 
 html.dark .btn-primary:hover {
     background-color: #DE7844;
-    border-color: #F16811;
+    border-color: black;
+    color: black;
 }
 
 html.dark .btn-info {
@@ -71,6 +72,7 @@ html.dark .btn-info {
 html.dark .btn-info:hover {
     background-color: #9A9A9A;
     border-color: #ABABAB;
+    color: black;
 }
 
 #mode {
