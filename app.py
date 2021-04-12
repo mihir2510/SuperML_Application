@@ -204,7 +204,7 @@ def process_result_gen():
         return redirect(url_for('.result_gen'))
     #print(stats.head())
     time_taken = time()-start
-    unit = 'sseconds'
+    unit = 'seconds'
     if time_taken>120:
         time_taken = time_taken/60
         unit = 'minutes'

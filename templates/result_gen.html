@@ -147,10 +147,10 @@
 
                 <div>
                     <label class="check"> <input type="checkbox" name="fe_method" value="all_features" checked> <span>All Features</span> </label>
-                    <label class="check"> <input type="checkbox" name="fe_method" value="anova"> <span>Anova</span> </label>
-                    <label class="check"> <input type="checkbox" name="fe_method" value="pca"> <span>PCA</span> </label>
-                    <label class="check"> <input type="checkbox" name="fe_method" value="correlation"> <span>Correlation</span> </label>
-                    <label class="check"> <input type="checkbox" name="fe_method" value="select_from_model"> <span>Select From Model</span> </label>
+                    <label class="check"> <input type="checkbox" name="fe_method" value="anova" checked> <span>Anova</span> </label>
+                    <label class="check"> <input type="checkbox" name="fe_method" value="pca" checked> <span>PCA</span> </label>
+                    <label class="check"> <input type="checkbox" name="fe_method" value="correlation" checked> <span>Correlation</span> </label>
+                    <label class="check"> <input type="checkbox" name="fe_method" value="select_from_model" checked> <span>Select From Model</span> </label>
                 </div>
 
             </div>
@@ -162,9 +162,9 @@
 
                 <div>
                     <label class="check"> <input type="checkbox" name="hpo_method" value="standard" checked> <span> No HPO </span> </label>
-                    <label class="check"> <input type="checkbox" name="hpo_method" value="grid_search"> <span>Grid Search</span> </label>
-                    <label class="check"> <input type="checkbox" name="hpo_method" value="random_search"> <span>Random Search</span> </label>
-                    <label class="check"> <input type="checkbox" name="hpo_method" value="bayesian_tpe"> <span>Bayesian TPE</span> </label>
+                    <label class="check"> <input type="checkbox" name="hpo_method" value="grid_search" checked> <span>Grid Search</span> </label>
+                    <label class="check"> <input type="checkbox" name="hpo_method" value="random_search" checked> <span>Random Search</span> </label>
+                    <label class="check"> <input type="checkbox" name="hpo_method" value="bayesian_tpe" checked> <span>Bayesian TPE</span> </label>
                 </div>
             </div>
         </div>
@@ -204,7 +204,7 @@
 
             <div class="form-group">
                 <label for="label" class="labeller"> Enter max evals <a href="#" data-placement="right" data-toggle="tooltip" title="Maximum number of iterations to be performed during Hyper Parameter Optimization process"><img id="info-base" src={{ url_for( 'static', filename='images/icons/info.svg' ) }} /></a></label>
-                <input class="form-control" type="text" name="max_evals" placeholder="Enter max evals" value="500" required>
+                <input class="form-control" type="text" name="max_evals" placeholder="Enter max evals" value="100" required>
             </div>
 
             <div class="form-group">
@@ -333,20 +333,24 @@
             'DecisionTreeRegressor',
             'RandomForestRegressor',
             'AdaBoostRegressor',
-            'ExtraTreesRegressor'
+            'ExtraTreesRegressor',
+            'BaggingRegressor',
+            'GradientBoostingRegressor'
         ]
         let predictionModelNames = {
             'LinearRegression': 'Linear Regression',
             'Lasso': 'Lasso Regression',
             'Ridge': 'Ridge Regression',
-            'DecisionTreeRegressor': 'Decision Tree Regression',
-            'RandomForestRegressor': 'Random Forest Regression',
-            'AdaBoostRegressor': 'AdaBoost Regression',
-            'ExtraTreesRegressor': 'Extra Trees Regression'
+            'DecisionTreeRegressor': 'Decision Tree Regressor',
+            'RandomForestRegressor': 'Random Forest Regressor',
+            'AdaBoostRegressor': 'AdaBoost Regressor',
+            'ExtraTreesRegressor': 'Extra Trees Regressor',
+            'GradientBoostingRegressor': 'Gradient Boost Regressor',
+            'BaggingRegressor': 'Bagging Regressor'
         }
 
         let classificationModels = ['LogisticRegression', 'RandomForestClassifier', 'AdaBoostClassifier',
-            'GradientBoostingClassifier', 'DecisionTreeClassifier', 'ExtraTreesClassifier'
+            'GradientBoostingClassifier', 'DecisionTreeClassifier', 'ExtraTreesClassifier', 'BaggingClassifier'
         ]
 
         let classificationModelNames = {
@@ -355,7 +359,8 @@
             'AdaBoostClassifier': 'AdaBoost Classifier',
             'GradientBoostingClassifier': 'Gradient Boosting Classifier',
             'DecisionTreeClassifier': 'Decision Tree Classifier',
-            'ExtraTreesClassifier': 'Extra Trees Classifier'
+            'ExtraTreesClassifier': 'Extra Trees Classifier',
+            'BaggingClassifier': 'Bagging Classifier'
         }
 
         window.addEventListener('load', (e) => {

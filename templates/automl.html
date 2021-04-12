@@ -306,7 +306,9 @@
             'DecisionTreeRegressor',
             'RandomForestRegressor',
             'AdaBoostRegressor',
-            'ExtraTreesRegressor'
+            'ExtraTreesRegressor',
+            'BaggingRegressor',
+            'GradientBoostingRegressor'
         ]
         let predictionModelNames = {
             'LinearRegression': 'Linear Regression',
@@ -315,11 +317,13 @@
             'DecisionTreeRegressor': 'Decision Tree Regression',
             'RandomForestRegressor': 'Random Forest Regression',
             'AdaBoostRegressor': 'AdaBoost Regression',
-            'ExtraTreesRegressor': 'Extra Trees Regression'
+            'ExtraTreesRegressor': 'Extra Trees Regression',
+            'GradientBoostingRegressor': 'Gradient Boost Regressor',
+            'BaggingRegressor': 'Bagging Regressor'
         }
 
         let classificationModels = ['LogisticRegression', 'RandomForestClassifier', 'AdaBoostClassifier',
-            'GradientBoostingClassifier', 'DecisionTreeClassifier', 'ExtraTreesClassifier'
+            'GradientBoostingClassifier', 'DecisionTreeClassifier', 'ExtraTreesClassifier', 'BaggingClassifier'
         ]
 
         let classificationModelNames = {
@@ -328,7 +332,8 @@
             'AdaBoostClassifier': 'AdaBoost Classifier',
             'GradientBoostingClassifier': 'Gradient Boosting Classifier',
             'DecisionTreeClassifier': 'Decision Tree Classifier',
-            'ExtraTreesClassifier': 'Extra Trees Classifier'
+            'ExtraTreesClassifier': 'Extra Trees Classifier',
+            'BaggingClassifier': 'Bagging Classifier'
         }
 
         window.addEventListener('load', (e) => {
