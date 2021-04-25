@@ -34,7 +34,7 @@
 
 * Get the code
 ```sh
-        $ git clone https://github.com/mihir2510/AutoML_Application.git
+        $ git clone https://github.com/mihir2510/SuperML.git
 ```
 
 

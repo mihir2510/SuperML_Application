@@ -90,7 +90,7 @@ def process():
     dataset_path = './data/{}'.format(uploaded_file.filename or 'dataset.csv')
     uploaded_file.save(dataset_path)
     dataset = read_csv(dataset_path)
-    pickle_path = './models/model.pickle'
+    pickle_path = './models/model_pickle'
     excel_path = './excel_files/excel'
     regression_models = ['LinearRegression', 'Ridge', 'Lasso', 'DecisionTreeRegressor', 'RandomForestRegressor', 'AdaBoostRegressor', 'ExtraTreesRegressor', 'GradientBoostingRegressor']
     classification_models = ['LogisticRegression','RandomForestClassifier', 'AdaBoostClassifier', 'GradientBoostingClassifier', 'ExtraTreesClassifier', 'DecisionTreeClassifier']
@@ -176,7 +176,7 @@ def process_result_gen():
     dataset_path = './data/{}'.format(uploaded_file.filename or 'dataset.csv')
     uploaded_file.save(dataset_path)
     dataset = read_csv(dataset_path)
-    pickle_path = './models/model.pickle'
+    pickle_path = './models/model_pickle'
     excel_path = './excel_files/excel'
     print(formdata)
     models = formdata.get('models', None)
