@@ -60,6 +60,7 @@ h3 {
 
 h4 {
     font-size: 21px;
+    overflow-wrap: break-word;
 }
 
 h5 {
